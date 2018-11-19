@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	hello git
-
-</body> https://github.com/seejin868/Seej.git
+	test3
+</body>
 </html>
