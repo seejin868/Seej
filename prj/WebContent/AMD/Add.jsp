@@ -13,14 +13,19 @@
 <script type="text/javascript">
 	//스마트 에디터 화면에 띄우기 위한 구문
 	var oEditors = [];
-	window.onload = function() {
+	
+	$(function(){
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef : oEditors,
 			elPlaceHolder : "content",
 			sSkinURI : "../se/SmartEditor2Skin.html",
 			fCreator : "createSEditor2"
 		});
-	};
+		
+	});
+/* 	window.onload = function() {
+		
+	}; */
 
 	//스마트 에디터 textarea에 작성한 데이터 전달하기
 	function submitContents(elClickedObj) {

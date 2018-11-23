@@ -1,4 +1,5 @@
 
+<%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="drawChanger.PngFileMaker"%>
 <%@page import="drawChanger.Base64Utils"%>
@@ -33,12 +34,12 @@
 	String pathAndFilename = saveDir+"\\"+filename;
 	
 	new PngFileMaker(pathAndFilename, bt);
-	
-	
-	MultipartRequest mr = new MultipartRequest( request, saveDir, maxFileSize, "UTF-8", new DefaultFileRenamePolicy() );
-
-	
-	String draw = "draws/"+filename;
+	/* 
+	int maxFileSize = 1024*1024*10 ; //10MB
+	MultipartRequest mr = new MultipartRequest( request, saveDir, maxFileSize, "UTF-8" , new DefaultFileRenamePolicy());
+ */
+	String draw = "../draws/"+filename;
+	//String draw = mr.getOriginalFileName(filename);
 
 	String file = request.getRealPath("file");
 	
@@ -65,6 +66,6 @@
 	//out.println("<img src='test.png' />"); 
 %>
 
-<img src="../draws/test.png" alt="이미지" /><!-- AMD폴더에서 나온후 draws폴더에서 이미지파일을 찾는다 -->
+<img src="<%=draw %>" alt="이미지" /><!-- AMD폴더에서 나온후 draws폴더에서 이미지파일을 찾는다 -->
 </body>
 </html>
