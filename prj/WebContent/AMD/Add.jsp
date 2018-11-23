@@ -6,8 +6,7 @@
 <meta charset="UTF-8">
 <title>add</title>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script type="text/javascript" src="../se/js/HuskyEZCreator.js" charset="utf-8"></script>
 <script type="text/javascript">
@@ -23,9 +22,6 @@
 		});
 		
 	});
-/* 	window.onload = function() {
-		
-	}; */
 
 	//스마트 에디터 textarea에 작성한 데이터 전달하기
 	function submitContents(elClickedObj) {
@@ -41,33 +37,16 @@
 
 	$(function() {
 		$("#ok").click(function() {
-			//console.log("ok");
+			
 			var canvasUrl = document.getElementById("canvas").toDataURL();
-			//alert(canvasUrl);
 			
-			
-
 			var input = $("<input>").attr('name', 'canvasUrl').val(canvasUrl);
-			
-			//var dataURL = canvas.toDataURL('image/jpeg', 0.5);
-			//var canvas = document.getElementById("canvas");
-			//var dataURL = canvas.toDataURL('image/png');
-			/* 
-			var blob = dataURItoBlob(dataURL);
-			//var blob = dataURItoBlob(canvasUrl);
-			
-			var fd = new FormData(document.forms[0]);
-			//fd.append("canvasImage", blob);
-			 */
-			//var input = $("<input>").attr('name', 'canvasUrl').val(blob);
-			
+			//canvas에서 얻은 dataURL을 포함해서 전송
 			$("#frm").append($(input));
-			//$("#frm").append($(input));
 			document.frm.action = "addOk.jsp";
 			document.frm.method = "post";
 			document.frm.submit();
 
-			//});
 		});
 	});
 	
@@ -147,7 +126,7 @@
 <body>
 
 	<div id="formwrapper">
-		<form action="" id="frm" name="frm" method="get">
+		<form action="" id="frm" name="frm" enctype="multipart/form-data">
 			<input type="hidden" value="<%=session.getAttribute("id")%>"
 				name="id" />
 			<!--세션으로 id 받는 부분  -->
