@@ -6,12 +6,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import connection.OracleXeConnection;
+import connection.OracleXEConnection;
+import vo.PostimgVO;
 
 public class PostimgDAO {
 	
-	Connection conn = OracleXeConnection.getInstance().getConnection();
-	StringBuffer sb;
+	Connection conn = OracleXEConnection.getInstance().getConnection();
+	StringBuffer sb = new StringBuffer();
 	
 	//모든게시물 조회
 	public ArrayList<PostimgVO> selectAll(){
@@ -56,7 +57,7 @@ public class PostimgDAO {
 		ArrayList<PostimgVO> list = new ArrayList<>();
 		sb.setLength(0);
 		sb.append(" insert into postimg ");
-		sb.append(" values( postimg_pno_seq.nextval,? ,? ,? ,? ,? ,0 ,0 , sysdate) ");
+		sb.append(" values( postimg_pno_seq.nextval, ? ,? ,? ,? ,? ,0 ,0 , sysdate) ");
 				
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sb.toString());

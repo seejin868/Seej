@@ -8,9 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class OracleXeConnection {
+public class OracleXEConnection {
 	
-	private static OracleXeConnection oc = null;
+	private static OracleXEConnection oc = null;
 	private static Connection conn = null;
 	
 	
@@ -24,13 +24,13 @@ public class OracleXeConnection {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;*/
 	
-	public OracleXeConnection() {
+	public OracleXEConnection() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public static OracleXeConnection getInstance() {
+	public static OracleXEConnection getInstance() {
 		if(oc == null) {
-			oc = new OracleXeConnection();
+			oc = new OracleXEConnection();
 		}
 		return oc;
 	}

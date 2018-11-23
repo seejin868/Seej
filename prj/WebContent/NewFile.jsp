@@ -146,5 +146,3 @@ $(document).ready(function(){
 
 </body>
 </html>
-
-출처: http://bloodguy.tistory.com/entry/HTML5-저장가능한-그림판 [Bloodguy]
