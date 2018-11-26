@@ -11,8 +11,13 @@ import vo.PostimgVO;
 
 public class PostimgDAO {
 	
-	Connection conn = OracleXEConnection.getInstance().getConnection();
-	StringBuffer sb = new StringBuffer();
+	Connection conn;
+	StringBuffer sb;
+	
+	public PostimgDAO() { 
+		conn = OracleXEConnection.getInstance().getConnection();
+		sb = new StringBuffer();
+	}
 	
 	//모든게시물 조회
 	public ArrayList<PostimgVO> selectAll(){
@@ -54,7 +59,6 @@ public class PostimgDAO {
 	
 	//게시물 추가
 	public void addData(PostimgVO vo){
-		ArrayList<PostimgVO> list = new ArrayList<>();
 		sb.setLength(0);
 		sb.append(" insert into postimg ");
 		sb.append(" values( postimg_pno_seq.nextval, ? ,? ,? ,? ,? ,0 ,0 , sysdate) ");
@@ -77,7 +81,6 @@ public class PostimgDAO {
 	
 /*	// 미리 준비
 		public 리턴형 메소드이름(){
-			ArrayList<PostimgVO> list = new ArrayList<>();
 			sb.setLength(0);
 			sb.append("");
 			

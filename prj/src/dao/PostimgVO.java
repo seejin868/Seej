@@ -51,6 +51,25 @@ public class PostimgVO {
 		this.plike = plike;
 	}
 
+	
+	
+	
+	
+
+	public PostimgVO(String ptitle, String pwriter, String pcontent, String pdraw, String pfile) {
+		super();
+		this.ptitle = ptitle;
+		this.pwriter = pwriter;
+		this.pcontent = pcontent;
+		this.pdraw = pdraw;
+		this.pfile = pfile;
+	}
+
+
+
+
+
+
 
 	public void setPno(int pno) {
 		this.pno = pno;

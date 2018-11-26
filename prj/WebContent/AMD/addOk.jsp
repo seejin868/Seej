@@ -1,4 +1,6 @@
 
+<%@page import="vo.PostimgVO"%>
+<%@page import="dao.PostimgDAO"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="drawChanger.PngFileMaker"%>
@@ -33,7 +35,7 @@
 		byte[] bt = Base64Utils.decodeBase64ToBytes(dataUrl);
 		String filename = "test.png";//파일명
 		String pathAndFilename = saveDirDraws + "\\" + filename;//경로+파일명
-		new PngFileMaker(pathAndFilename, bt);
+		new PngFileMaker(pathAndFilename, bt);//(만들파일의 경로와 이름 , 실 데이터(byte[]))
 
 		String draw = "../draws/" + filename;
 		//String draw = mr.getOriginalFileName(filename);
@@ -49,6 +51,10 @@
 		
 		dao.addData(vo);
 		*/
+		PostimgDAO dao = new PostimgDAO();
+		PostimgVO vo = new PostimgVO(title,writer,content,draw,file);
+		dao.addData(new PostimgVO(title,writer,content,draw,file));
+		
 
 		out.println("title : " + title + "<br/>");
 		out.println("writer : " + writer + "<br/>");
