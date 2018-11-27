@@ -9,6 +9,7 @@
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script type="text/javascript" src="../se/js/HuskyEZCreator.js" charset="utf-8"></script>
+
 <script type="text/javascript">
 	//스마트 에디터 화면에 띄우기 위한 구문
 	var oEditors = [];
@@ -36,65 +37,49 @@
 	}
 
 	$(function() {
+		//ok버튼을 클릭하면
 		$("#ok").click(function() {
 			
 			var canvasUrl = document.getElementById("canvas").toDataURL();
 			
 			var input = $("<input>").attr('name', 'canvasUrl').val(canvasUrl);
+			
 			//canvas에서 얻은 dataURL을 포함해서 전송
 			$("#frm").append($(input));
 			document.frm.action = "addOk.jsp";
 			document.frm.method = "post";
+			
+			//스마트 에디터값을 전송
+			submitContents($('#ok'));
+			//폼을 전송
 			document.frm.submit();
+
+		});
+		$("#reset").click(function(){
+			    // canvas
+			    var cnvs = document.getElementById('canvas');
+			    // context
+			    var ctx = canvas.getContext('2d');
+
+			    // 픽셀 정리
+			    ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+			    // 컨텍스트 리셋
+			    ctx.beginPath();
 
 		});
 	});
 	
-	//그린 그림을 변환
-	function dataURItoBlob(dataURI) {
-    // convert base64/URLEncoded data component to raw binary data held in a string
-    var byteString;
-    if (dataURI.split(',')[0].indexOf('base64') >= 0)
-        byteString = atob(dataURI.split(',')[1]);
-    else
-        byteString = unescape(dataURI.split(',')[1]);
-
-    // separate out the mime component
-    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-
-    // write the bytes of the string to a typed array
-    var ia = new Uint8Array(byteString.length);
-    for (var i = 0; i < byteString.length; i++) {
-        ia[i] = byteString.charCodeAt(i);
-    }
-
-    return new Blob([ia], {type:mimeString});
-}
-//캔버스를 업로드?
-	function uploadCanvasData()
-	{
-	    var canvas = $('#ImageDisplay').get(0);
-	    var dataUrl = canvas.toDataURL("image/jpeg");
-
-	    var blob = dataURItoBlob(dataUrl);
-
-	    var formData = new FormData();
-	    formData.append("file", blob);
-
-	    var request = new XMLHttpRequest();
-	    request.onload = completeRequest;
-
-	    request.open("POST", "IdentifyFood");
-	    request.send(formData);
-	}
-	
-	
 </script>
 
 <style type="text/css">
+*{
+	margin: 0;
+	padding: 0;
+}
+div{
+	margin: auto;
+}
 #formwrapper {
-	/* position: relative; */
-	/* padding: auto; */
 	border: 1px solid gray;
 	margin: auto;
 	width: 800px
@@ -104,19 +89,16 @@
 	width: 790px;
 }
 
-#draw {
-	/* width: 790px; */
-	/* height: 400px; */
-	
-}
-
 #buttons {
 	text-align: center;
 }
-
+#ok, #cancel{
+	width : 100px;
+	height: 25px;
+	background-color: white;
+}
 #canvas {
-	/* left : 20%; */
-	border: 1px solid green;
+	border: 1px solid black;
 	margin: auto;
 	background-color: white;
 }
@@ -142,16 +124,16 @@
 				이미지파일 <br /> <input type="file" name="file" id="file" />
 			</div>
 
-			그림그리기
+			그림그리기 <input type="button" value="캔버스 리셋" id='reset'/>
 			<div id="draw">
-				<canvas name="canvas" id="canvas" width="780" height="400"></canvas>
+				<canvas name="canvas" id="canvas" width="790" height="400"></canvas>
 				<script src="canvas.js"></script>
 			</div>
 			<!-- <input type="hidden" id='canvasUrl' /> -->
 
 			<div id="buttons">
-				<input type="button" value="작성" name="ok" id="ok" /> <input
-					type="button" value="취소" name="cancel" id="cancel" />
+				<input type="button" value="작성" name="ok" id="ok" /> 
+				<input type="button" value="취소" name="cancel" id="cancel" />
 			</div>
 		</form>
 	</div>

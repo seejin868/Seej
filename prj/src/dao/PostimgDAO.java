@@ -20,7 +20,7 @@ public class PostimgDAO {
 	}
 	
 	//모든게시물 조회
-	public ArrayList<PostimgVO> selectAll(){
+	public ArrayList<PostimgVO> getAll(){
 		ArrayList<PostimgVO> list = new ArrayList<>();
 		sb.setLength(0);
 		sb.append("select * from postimg");
@@ -39,7 +39,7 @@ public class PostimgDAO {
 			    String pfile = rs.getString("p_file");
 			    int plike = rs.getInt("p_like");
 			    int phit = rs.getInt("p_hit");
-			    String pdate = rs.getString("date");
+			    String pdate = rs.getString("p_date");
 			    
 			    list.add(
 			    		new PostimgVO(pno, ptitle, pwriter, pcontent, pdraw, pfile, plike, phit, pdate)
@@ -54,8 +54,39 @@ public class PostimgDAO {
 		return list;
 	} 
 	
-	//게시물 검색
-	
+	//하나만 얻어오기
+	public PostimgVO getOne(int pno){
+		sb.setLength(0);
+		sb.append(" select * from postimg ");
+		sb.append(" where p_no = ? ");
+		PostimgVO vo =null;
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+			pstmt.setInt(1, pno);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			rs.next();
+		    String ptitle = rs.getString("p_title");
+		    String pwriter = rs.getString("p_writer");
+		    String pcontent = rs.getString("p_content") ;
+		    String pdraw = rs.getString("p_draw");
+		    String pfile = rs.getString("p_file");
+		    int plike = rs.getInt("p_like");
+		    int phit = rs.getInt("p_hit");
+		    String pdate = rs.getString("p_date");
+			
+		    vo = new PostimgVO(pno, ptitle, pwriter, pcontent, pdraw, pfile, plike, phit, pdate);
+		    
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return vo;
+		
+	} 
+
 	
 	//게시물 추가
 	public void addData(PostimgVO vo){
@@ -78,6 +109,27 @@ public class PostimgDAO {
 		}
 				
 	} 
+	//시퀀스 last_number 조회
+		public int getSeqLastNum(){
+			int seqLastNum = 0;
+			sb.setLength(0);
+			sb.append(" SELECT LAST_NUMBER FROM USER_SEQUENCES ");
+			sb.append(" WHERE SEQUENCE_NAME = UPPER('postimg_pno_seq')");
+			
+			try {
+				PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+							
+				ResultSet rs = pstmt.executeQuery();
+				rs.next();
+				seqLastNum = rs.getInt(1);
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return seqLastNum;
+		} 
+	
 	
 /*	// 미리 준비
 		public 리턴형 메소드이름(){
