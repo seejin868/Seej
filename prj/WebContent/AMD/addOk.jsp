@@ -76,7 +76,6 @@
 		
 		//파일 다중 추가
 		String files="";
-		
 		Enumeration names = mr1.getFileNames();
 		if(names != null){
 			out.println("names : ");

@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>modify</title>
 <%
+//추가해야할 것 들 취소버튼누르면 메인으로 이동
 	//pno를 받는다
 	String ParaPno = request.getParameter("pno");
 
@@ -63,11 +64,13 @@
 		firstDraw();
 		
 		//파일태그 추가
+		var fileNumber = 0;
 		$("#addTagButton").click(function(){
+			//console.log("ok");
 			fileNumber+=1;
 			var fileTag = $("<input>").attr('name','file'+fileNumber);
 			fileTag.attr('type','file');
-			console.log(fileTag);
+			//console.log(fileTag);
 			$("#fileDiv").append(fileTag);
 			$("#fileDiv").append("<br/>");
 		});
@@ -190,6 +193,9 @@ div{
 #canvas {
 	border: 1px solid black;
 	margin: auto;
+	background-color: white;
+}
+#addTagButton, #reset, #init{
 	background-color: white;
 }
 </style>

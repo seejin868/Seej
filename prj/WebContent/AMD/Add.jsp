@@ -11,6 +11,8 @@
 <script type="text/javascript" src="../se/js/HuskyEZCreator.js" charset="utf-8"></script>
 
 <script type="text/javascript">
+//추가해야할 것 들 취소버튼누르면 메인으로 이동
+
 	//스마트 에디터 화면에 띄우기 위한 구문
 	var oEditors = [];
 	
@@ -36,16 +38,16 @@
 		}
 	}
 	
-	var fileNumber = 0;
 
 	$(function() {
 		
 		//파일태그 추가
+		var fileNumber = 0;
 		$("#addTagButton").click(function(){
 			fileNumber+=1;
 			var fileTag = $("<input>").attr('name','file'+fileNumber);
 			fileTag.attr('type','file');
-			console.log(fileTag);
+			//console.log(fileTag);
 			$("#fileDiv").append(fileTag);
 			$("#fileDiv").append("<br/>");
 		});
@@ -116,6 +118,9 @@ div{
 #buttons {
 	text-align: center;
 }
+#addTagButton, #reset{
+	background-color: white;
+}
 #ok, #cancel{
 	width : 100px;
 	height: 25px;
@@ -146,7 +151,7 @@ div{
 			</div>
 			<div id="fileDiv">
 				<input type="button" value=" 파일추가 " id="addTagButton" />
-				이미지파일 <br /> <input type="file" name="file" id="file" />
+				이미지파일 <br /> <input type="file" name="file[]" id="file"  />
 				
 			</div>
 
