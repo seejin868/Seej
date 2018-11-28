@@ -1,4 +1,8 @@
 
+<%@page import="javax.swing.plaf.multi.MultiFileChooserUI"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.io.File"%>
+<%@page import="java.util.Enumeration"%>
 <%@page import="check.NameChecker"%>
 <%@page import="vo.PostimgVO"%>
 <%@page import="dao.PostimgDAO"%>
@@ -9,7 +13,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-	<%//널값인 경우 설정 하자(일단은 나중에)
+<%//널값인 경우 설정 하자(일단은 나중에)
 		
 		PostimgDAO dao = new PostimgDAO();//dao
 	
@@ -40,14 +44,14 @@
 		//String draw = mr.getOriginalFileName(filename);
 		
 		//파일명이 중복되는지 검사
-		String file = "";
-		if(mr1.getParameter("file") != null){
+		/* String file = "";
+		if(mr1.getOriginalFileName("file") != null){
 			String splitImgFileName = mr1.getOriginalFileName("file");
 			NameChecker checker = new NameChecker();
 			String imgFileName = checker.fileNameCheck(saveDirUpload, splitImgFileName);
-			
-			file = "../upload/"+imgFileName;
-		}
+			 
+			file = "../upload/"+mr1.getFilesystemName("file");
+		} */
 		
 		//String file = "../upload/"+mr1.getOriginalFileName("file");
 		/* 
@@ -59,19 +63,60 @@
 		dao.addData(vo);
 		*/
 		
-		PostimgVO vo = new PostimgVO(title,writer,content,draw,file);
-		dao.addData(new PostimgVO(title,writer,content,draw,file));
 		
+		//dao.addData(new PostimgVO(title,writer,content,draw,file));
+		
+		//실험용
+		//String sample = mr1.getOriginalFileName("file");
+		//String sample = mr1.getFileNames();
+		/* String sample1 = mr1.getFilesystemName("file");
+		out.println("sample1 : " + sample1 + "<br/>");
+		
+		File sample2 = mr1.getFile("file"); */
+		
+		//파일 다중 추가
+		String files="";
+		
+		Enumeration names = mr1.getFileNames();
+		if(names != null){
+			out.println("names : ");
+			while(names.hasMoreElements()){
+				String s3FileName = (String)names.nextElement();//태그이름을 받아온다
+				String s3ChangedFileName = mr1.getFilesystemName(s3FileName);//저장될 파일명을 받아온다.
+				//파일이 있을시에만 경로와 파일명을 추가
+				if(s3ChangedFileName != null){
+					files += "../upload/"+s3ChangedFileName + ",";
+				}
+			}
+			out.println(files+"<br/>");
+		}
+		
+		PostimgVO vo = new PostimgVO(title,writer,content,draw,files);
+		
+		//vo.setPfile(files);
+		//dao.updateOne(vo);
+		//DB에 추가
+		dao.addData(vo);
 
 		out.println("title : " + title + "<br/>");
 		out.println("writer : " + writer + "<br/>");
 		out.println("content : " + content + "<br/>");
 		out.println("draw : " + draw + "<br/>");
-		out.println("file : " + file + "<br/>");
+		out.println("file : " + files + "<br/>");
 		out.println(pathAndFilename + "<br/>");
 		out.println(dao.getSeqLastNum() + "<br/>");
 	%>
 
-	<img src="<%=draw%>" alt="이미지" />
-	<img src="<%=file%>" alt="이미지" />
-	<!-- AMD폴더에서 나온후 draws폴더에서 이미지파일을 찾는다 -->
+<img src="<%=draw%>" alt="이미지" />
+<%-- <img src="<%=file%>" alt="이미지" /> --%>
+
+	<%
+		//files에 저장된 경로(,로 구분됨)를 나눠서 반복문으로 그림을 출력
+		String[] filePath = files.split(",");
+		for(String imgPath : filePath){
+	%>
+	<img src="<%=imgPath %>" alt="실험기" />
+	<%		
+		}	
+	%>
+<!-- AMD폴더에서 나온후 draws폴더에서 이미지파일을 찾는다 -->

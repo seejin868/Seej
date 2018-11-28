@@ -118,7 +118,6 @@ public class PostimgDAO {
 			
 			try {
 				PreparedStatement pstmt = conn.prepareStatement(sb.toString());
-							
 				ResultSet rs = pstmt.executeQuery();
 				rs.next();
 				seqLastNum = rs.getInt(1);
@@ -129,15 +128,14 @@ public class PostimgDAO {
 			}
 			return seqLastNum;
 		} 
-	
 		
-	// 열 변경
+	// 내용 변경
 		public void updateOne( PostimgVO vo){
 			sb.setLength(0);
 			
-			sb.append("Update postimg ");
-			sb.append(" set p_title = ? ,p_content = ? ,p_file = ? ");//////////////////////////////////////////////////
-			sb.append(" where  pno = ? ");
+			sb.append(" Update postimg ");
+			sb.append(" set p_title = ? ,p_content = ? ,p_file = ? ");
+			sb.append(" where  p_no = ? ");
 			
 			try {
 				PreparedStatement pstmt = conn.prepareStatement(sb.toString());
@@ -156,6 +154,26 @@ public class PostimgDAO {
 		} 
 
 	
+
+// 삭제
+		public void deleteOne(int pno){
+			sb.setLength(0);
+			sb.append("delete from PostImg where p_no = ?");
+			
+			try {
+				PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+				pstmt.setInt(1, pno);
+				
+				pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		} 
+		
+
 /*	// 미리 준비
 		public 리턴형 메소드이름(){
 			sb.setLength(0);

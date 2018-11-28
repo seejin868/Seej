@@ -35,10 +35,32 @@
 		} catch (e) {
 		}
 	}
+	
+	var fileNumber = 0;
 
 	$(function() {
+		
+		//파일태그 추가
+		$("#addTagButton").click(function(){
+			fileNumber+=1;
+			var fileTag = $("<input>").attr('name','file'+fileNumber);
+			fileTag.attr('type','file');
+			console.log(fileTag);
+			$("#fileDiv").append(fileTag);
+			$("#fileDiv").append("<br/>");
+		});
+		
 		//ok버튼을 클릭하면
 		$("#ok").click(function() {
+			
+			//타이틀 부분이 없으면 경고
+			if($('#title').val().trim() == "" ){
+				
+				$("#title").focus();
+				alert("타이틀이 없습니다");
+				
+				return;
+			}
 			
 			var canvasUrl = document.getElementById("canvas").toDataURL();
 			
@@ -55,6 +77,8 @@
 			document.frm.submit();
 
 		});
+
+		//캔버스 리셋
 		$("#reset").click(function(){
 			    // canvas
 			    var cnvs = document.getElementById('canvas');
@@ -120,8 +144,10 @@ div{
 				본문 <br />
 				<textarea rows="25" cols="50" id="content" name="content"></textarea>
 			</div>
-			<div>
+			<div id="fileDiv">
+				<input type="button" value=" 파일추가 " id="addTagButton" />
 				이미지파일 <br /> <input type="file" name="file" id="file" />
+				
 			</div>
 
 			그림그리기 <input type="button" value="캔버스 리셋" id='reset'/>

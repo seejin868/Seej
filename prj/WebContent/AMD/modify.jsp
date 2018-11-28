@@ -8,9 +8,18 @@
 <meta charset="UTF-8">
 <title>modify</title>
 <%
-	//pno를 받아와서
-	int pno = Integer.parseInt( request.getParameter("pno") );
+	//pno를 받는다
+	String ParaPno = request.getParameter("pno");
+
+	//pno가 없는 경우 메인으로 이동
+	if(ParaPno == null){
+		response.sendRedirect("TempList.jsp");//나중에 메인페이지로 바꿀 예정
+		return;
+	}
+	
 	PostimgDAO dao = new PostimgDAO();
+	
+	int pno = Integer.parseInt( ParaPno );
 	PostimgVO vo =  dao.getOne(pno);//pno로 받아온 vo객체를 받아온다
 	
 %>
@@ -53,8 +62,39 @@
 		//그린 그림 불러오기
 		firstDraw();
 		
+		//파일태그 추가
+		$("#addTagButton").click(function(){
+			fileNumber+=1;
+			var fileTag = $("<input>").attr('name','file'+fileNumber);
+			fileTag.attr('type','file');
+			console.log(fileTag);
+			$("#fileDiv").append(fileTag);
+			$("#fileDiv").append("<br/>");
+		});
+		
+		//삭제버튼 누르면 deleteOk.jsp로 이동
+		$("#del").click(function(){
+			//input 추가
+			var input2 = $("<input>").attr('name', 'pno').val('<%=vo.getPno()%>');
+			//form에 추가
+			$("#frm").append($(input2));
+			document.frm.action = "deleteOk.jsp";
+			document.frm.method = "post";
+			//폼을 전송
+			document.frm.submit();
+		});
+		
 		//ok버튼을 클릭하면 전송
 		$("#ok").click(function() {
+			
+			//타이틀 부분이 없으면 경고
+			if($('#title').val().trim() == "" ){
+				
+				$("#title").focus();
+				alert("타이틀이 없습니다");
+				
+				return;
+			}
 			
 			var canvasUrl = document.getElementById("canvas").toDataURL();
 			
@@ -142,7 +182,7 @@ div{
 #buttons {
 	text-align: center;
 }
-#ok, #cancel{
+#ok, #cancel, #del{
 	width : 100px;
 	height: 25px;
 	background-color: white;
@@ -170,12 +210,13 @@ div{
 				본문 <br />
 				<textarea rows="25" cols="50" id="content" name="content" ></textarea>
 			</div>
-			<div>
-				이미지파일 <br /> <input type="file" name="file" id="file"/><!-- 이미지 파일을 새로 넣은 경우만 DB 변경 -->
+			<div id="fileDiv">
+				<input type="button" value=" 파일추가 " id="addTagButton" />
+				이미지파일 <br /> <input type="file" name="file" id="file" />
 			</div>
 
 			그림그리기 <input type="button" value="처음으로" id='init'/>
-			그림그리기 <input type="button" value="완전 리셋" id='reset'/>
+			<input type="button" value="완전 리셋" id='reset'/>
 			<div id="draw">
 				<canvas name="canvas" id="canvas" width="790" height="400" ></canvas>
 				<script src="canvas.js"></script>
@@ -185,6 +226,8 @@ div{
 			<div id="buttons">
 				<input type="button" value="작성" name="ok" id="ok" /> 
 				<input type="button" value="취소" name="cancel" id="cancel" />
+				<input type="button" value="삭제" name="del" id="del" />
+				
 			</div>
 		</form>
 	</div>
