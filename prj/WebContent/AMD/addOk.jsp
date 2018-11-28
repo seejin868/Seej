@@ -8,17 +8,8 @@
 <%@page import="drawChanger.Base64Utils"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title></title>
-<script type="text/javascript">
-	
-</script>
-</head>
-<body>
-	<%
+
+	<%//널값인 경우 설정 하자(일단은 나중에)
 		
 		PostimgDAO dao = new PostimgDAO();//dao
 	
@@ -29,7 +20,7 @@
 		MultipartRequest mr1 = new MultipartRequest(
 				request, saveDirUpload, maxFileSize, "UTF-8", new DefaultFileRenamePolicy());
 
-		int nowSeqNum = dao.getSeqLastNum()-1;//현재 시퀀스 넘버
+		int nowSeqNum = dao.getSeqLastNum();//현재 시퀀스 넘버
 		
 		String title = mr1.getParameter("title");
 
@@ -48,15 +39,15 @@
 		String draw = "../draws/" + filename;
 		//String draw = mr.getOriginalFileName(filename);
 		
-		String splitImgFileName = mr1.getOriginalFileName("file");
-		NameChecker checker = new NameChecker();
-		//System.out.print(splitImgFileName[1]);
-		String imgFileName = checker.fileNameCheck(saveDirUpload, splitImgFileName);
-		
-		
-		//String file = "../upload/"+imgFileName;
-		//이미지 경로가 잘못됨?
-		String file = "../upload/"+imgFileName;
+		//파일명이 중복되는지 검사
+		String file = "";
+		if(mr1.getParameter("file") != null){
+			String splitImgFileName = mr1.getOriginalFileName("file");
+			NameChecker checker = new NameChecker();
+			String imgFileName = checker.fileNameCheck(saveDirUpload, splitImgFileName);
+			
+			file = "../upload/"+imgFileName;
+		}
 		
 		//String file = "../upload/"+mr1.getOriginalFileName("file");
 		/* 
@@ -84,5 +75,3 @@
 	<img src="<%=draw%>" alt="이미지" />
 	<img src="<%=file%>" alt="이미지" />
 	<!-- AMD폴더에서 나온후 draws폴더에서 이미지파일을 찾는다 -->
-</body>
-</html>

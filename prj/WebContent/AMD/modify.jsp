@@ -53,16 +53,20 @@
 		//그린 그림 불러오기
 		firstDraw();
 		
-		//ok버튼을 클릭하면
+		//ok버튼을 클릭하면 전송
 		$("#ok").click(function() {
 			
 			var canvasUrl = document.getElementById("canvas").toDataURL();
 			
-			var input = $("<input>").attr('name', 'canvasUrl').val(canvasUrl);
+			var input1 = $("<input>").attr('name', 'canvasUrl').val(canvasUrl);
+			var input2 = $("<input>").attr('name', 'pno').val('<%=vo.getPno()%>');
 			
 			//canvas에서 얻은 dataURL을 포함해서 전송
-			$("#frm").append($(input));
-			document.frm.action = "addOk.jsp";
+			//form에 추가
+			$("#frm").append($(input1));
+			$("#frm").append($(input2));
+			
+			document.frm.action = "modifyOk.jsp";
 			document.frm.method = "post";
 			
 			//스마트 에디터값을 전송
@@ -71,18 +75,27 @@
 			document.frm.submit();
 
 		});
-		$("#reset").click(function(){//리셋버튼을 누르면 화면지우기
-			    // canvas
-			    var cnvs = document.getElementById('canvas');
-			    // context
-			    var ctx = canvas.getContext('2d');
-
-			    // 픽셀 정리
-			    ctx.clearRect(0, 0, cnvs.width, cnvs.height);
-			    // 컨텍스트 리셋
-			    ctx.beginPath();
+		
+		//리셋버튼을 누르면 화면지우기
+		$("#reset").click( resetCanvas );
+		
+		$("#init").click(function(){
+			resetCanvas();
+			firstDraw();
 		});
 	});
+	
+	function resetCanvas(){
+		// canvas
+	    var cnvs = document.getElementById('canvas');
+	    // context
+	    var ctx = canvas.getContext('2d');
+
+	    // 픽셀 정리
+	    ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+	    // 컨텍스트 리셋
+	    ctx.beginPath();
+	}
 	
 	function firstDraw(){
         //이미지 객체 생성
@@ -97,7 +110,7 @@
 
             //canvas.drawImage() 함수를 사용하여 이미지 출력
             //drawImage ( image sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
-            ctx.drawImage( imgClo , 0, 0, 200, 200);
+            ctx.drawImage( imgClo , 0, 0, cvs.width, cvs.height);
        
         },false);
 
@@ -146,7 +159,7 @@ div{
 
 	<div id="formwrapper">
 		<form action="" id="frm" name="frm" enctype="multipart/form-data">
-			<input type="hidden" value="<%=session.getAttribute("id")%>"
+			<input type="hidden" value='<%=session.getAttribute("id")%>'
 				name="id" />
 			<!--세션으로 id 받는 부분  -->
 			<div>
@@ -161,7 +174,8 @@ div{
 				이미지파일 <br /> <input type="file" name="file" id="file"/><!-- 이미지 파일을 새로 넣은 경우만 DB 변경 -->
 			</div>
 
-			그림그리기 <input type="button" value="캔버스 리셋" id='reset'/>
+			그림그리기 <input type="button" value="처음으로" id='init'/>
+			그림그리기 <input type="button" value="완전 리셋" id='reset'/>
 			<div id="draw">
 				<canvas name="canvas" id="canvas" width="790" height="400" ></canvas>
 				<script src="canvas.js"></script>

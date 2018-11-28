@@ -130,6 +130,31 @@ public class PostimgDAO {
 			return seqLastNum;
 		} 
 	
+		
+	// 열 변경
+		public void updateOne( PostimgVO vo){
+			sb.setLength(0);
+			
+			sb.append("Update postimg ");
+			sb.append(" set p_title = ? ,p_content = ? ,p_file = ? ");//////////////////////////////////////////////////
+			sb.append(" where  pno = ? ");
+			
+			try {
+				PreparedStatement pstmt = conn.prepareStatement(sb.toString());
+				pstmt.setString(1, vo.getPtitle());
+				pstmt.setString(2, vo.getPcontent());
+				pstmt.setString(3, vo.getPfile());
+				pstmt.setInt(4, vo.getPno());
+				
+				pstmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		} 
+
 	
 /*	// 미리 준비
 		public 리턴형 메소드이름(){
