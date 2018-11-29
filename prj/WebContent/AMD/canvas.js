@@ -9,6 +9,8 @@ var canvas, ctx;
 window.onload = function() {
 	canvas = document.getElementById("canvas");
 	ctx = canvas.getContext("2d");
+	
+	//ctx.strokeStyle="yellow" 색바꾸기
 
 	canvas.addEventListener("mousedown", listener);
 	canvas.addEventListener("mousemove", listener);
@@ -75,4 +77,13 @@ function getPosition(event) {
 		X : x,
 		Y : y
 	};
+}
+//색변경
+function changeColor( r,g,b,a){
+	//ctx.strokeStyle = color;
+	ctx.strokeStyle = "rgba(" + r +","+ g +","+ b +"," + a +")";
+}
+//선 굵기 변경
+function changeThicknessLine(thick){
+	ctx.lineWidth = thick
 }

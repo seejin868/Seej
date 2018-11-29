@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+*{
+	margin: 0;
+	padding: 0;
+}
+div{
+	margin: auto;
+}
+#formwrapper {
+	border: 1px solid gray;
+	margin: auto;
+	width: 800px
+}
+
+#title, #draw, #file, #content {
+	width: 790px;
+}
+
+#buttons {
+	text-align: center;
+}
+#addTagButton, #reset{
+	background-color: white;
+}
+#ok, #cancel{
+	width : 100px;
+	height: 25px;
+	background-color: white;
+}
+#canvas {
+	border: 1px solid black;
+	margin: auto;
+	background-color: white;
+}
+.slider{
+	-webkit-appearance : none;
+	border: 1px solid;
+	height: 10px;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    border: 1px solid;
+}
