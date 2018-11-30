@@ -35,12 +35,22 @@
 		//파일태그 추가
 		var fileNumber = 0;
 		$("#addTagButton").click(function(){
-			fileNumber+=1;
+			
+			//썸네일 태그 추가
+			var radio = $("<input>").attr('name','thumb');
+			radio.attr('type','radio');
+			radio.val(fileNumber);
+			
+			//파일태그추가
 			var fileTag = $("<input>").attr('name','file'+fileNumber);
 			fileTag.attr('type','file');
-			//console.log(fileTag);
+			
+			//추가 
+			$("#fileDiv").append(radio);
 			$("#fileDiv").append(fileTag);
 			$("#fileDiv").append("<br/>");
+			
+			fileNumber++;
 		});
 		
 		//ok버튼을 클릭하면

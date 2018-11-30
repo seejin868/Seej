@@ -40,9 +40,10 @@ public class PostimgDAO {
 			    int plike = rs.getInt("p_like");
 			    int phit = rs.getInt("p_hit");
 			    String pdate = rs.getString("p_date");
+			    String pthumbnail=rs.getString("p_thumbnail");
 			    
 			    list.add(
-			    		new PostimgVO(pno, ptitle, pwriter, pcontent, pdraw, pfile, plike, phit, pdate)
+			    		new PostimgVO(pno, ptitle, pwriter, pcontent, pdraw, pfile, plike, phit, pdate, pthumbnail)
 			    		);
 			    
 			}
@@ -75,8 +76,9 @@ public class PostimgDAO {
 		    int plike = rs.getInt("p_like");
 		    int phit = rs.getInt("p_hit");
 		    String pdate = rs.getString("p_date");
+		    String pthumbnail = rs.getString("p_thumbnail");
 			
-		    vo = new PostimgVO(pno, ptitle, pwriter, pcontent, pdraw, pfile, plike, phit, pdate);
+		    vo = new PostimgVO(pno, ptitle, pwriter, pcontent, pdraw, pfile, plike, phit, pdate, pthumbnail);
 		    
 			
 		} catch (SQLException e) {
@@ -92,7 +94,7 @@ public class PostimgDAO {
 	public void addData(PostimgVO vo){
 		sb.setLength(0);
 		sb.append(" insert into postimg ");
-		sb.append(" values( postimg_pno_seq.nextval, ? ,? ,? ,? ,? ,0 ,0 , sysdate) ");
+		sb.append(" values( postimg_pno_seq.nextval, ? ,? ,? ,? ,? ,0 ,0 , sysdate , ? ) ");
 				
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sb.toString());
@@ -101,6 +103,7 @@ public class PostimgDAO {
 			pstmt.setString(3, vo.getPcontent());
 			pstmt.setString(4, vo.getPdraw());
 			pstmt.setString(5, vo.getPfile());
+			pstmt.setString(6, vo.getPthumbnail());
 			pstmt.executeUpdate();
 					
 		} catch (SQLException e) {
@@ -134,7 +137,7 @@ public class PostimgDAO {
 			sb.setLength(0);
 			
 			sb.append(" Update postimg ");
-			sb.append(" set p_title = ? ,p_content = ? ,p_file = ? ");
+			sb.append(" set p_title = ? ,p_content = ? ,p_file = ? ,p_thumbnail = ? ");
 			sb.append(" where  p_no = ? ");
 			
 			try {
@@ -143,6 +146,7 @@ public class PostimgDAO {
 				pstmt.setString(2, vo.getPcontent());
 				pstmt.setString(3, vo.getPfile());
 				pstmt.setInt(4, vo.getPno());
+				pstmt.setString(5, vo.getPthumbnail() );
 				
 				pstmt.executeUpdate();
 				

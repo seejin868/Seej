@@ -22,6 +22,7 @@
 	
 	int pno = Integer.parseInt( ParaPno );
 	PostimgVO vo =  dao.getOne(pno);//pno로 받아온 vo객체를 받아온다
+	String[] filePath = vo.getPfile().split(",");
 	
 %>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -51,8 +52,16 @@
 				<textarea rows="25" cols="50" id="content" name="content" ><%=vo.getPcontent() %></textarea>
 			</div>
 			<div id="fileDiv">
+			체크 해제시 DB에서 삭제 <br />
+				<%
+					int i = 0;
+					for(String src:filePath){
+						out.println("<img src='"+src+"' height='100'>");
+						out.println("<input type='checkbox' name='checkBoxes' id='checkBoxes' checked='checked' value='"+src+"' /> <br/>");
+					}
+				%>
 				<input type="button" value=" 파일추가 " id="addTagButton" />
-				이미지파일 <br /> <input type="file" name="file" id="file" />
+				이미지파일 <br />
 			</div>
 
 			그림그리기 <input type="button" value="처음으로" id='init'/>
@@ -67,7 +76,7 @@
 				<canvas name="canvas" id="canvas" width="790" height="400" ></canvas>
 				<script src="canvas.js"></script>
 			</div>
-			<!-- <input type="hidden" id='canvasUrl' /> -->
+			<input type="radio" name="thumb" value="-1" />
 
 			<div id="buttons">
 				<input type="button" value="작성" name="ok" id="ok" /> 

@@ -35,13 +35,22 @@
 		//파일태그 추가
 		var fileNumber = 0;
 		$("#addTagButton").click(function(){
-			//console.log("ok");
-			fileNumber+=1;
+			
+			//썸네일 태그 추가
+			var radio = $("<input>").attr('name','thumb');
+			radio.attr('type','radio');
+			radio.val(fileNumber);
+			
+			//파일태그추가
 			var fileTag = $("<input>").attr('name','file'+fileNumber);
 			fileTag.attr('type','file');
-			//console.log(fileTag);
+			
+			//추가 
+			$("#fileDiv").append(radio);
 			$("#fileDiv").append(fileTag);
 			$("#fileDiv").append("<br/>");
+			
+			fileNumber+=1;
 		});
 		
 		//삭제버튼 누르면 deleteOk.jsp로 이동
@@ -55,19 +64,18 @@
 		
 		//ok버튼을 클릭하면 전송
 		$("#ok").click(function() {
+			console.log(ok);
 			
 			//타이틀 부분이 없으면 경고
 			if($('#title').val().trim() == "" ){
-				
 				$("#title").focus();
 				alert("타이틀이 없습니다");
-				
 				return;
 			}
 			
 			var canvasUrl = document.getElementById("canvas").toDataURL();
-			
 			var input1 = $("<input>").attr('name', 'canvasUrl').val(canvasUrl);
+			input1.attr('type', 'hidden');
 			
 			//canvas에서 얻은 dataURL을 포함해서 전송
 			//form에 추가

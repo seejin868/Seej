@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Collections"%>
 <%@page import="java.util.Enumeration"%>
 <%@page import="vo.PostimgVO"%>
 <%@page import="check.NameChecker"%>
@@ -44,19 +46,39 @@
 	}
 
 	//파일들위치 메소드
-	String filesPath(MultipartRequest mr1, Enumeration fileNames) {
-		String files = "";
-		if (fileNames != null) {
-			while (fileNames.hasMoreElements()) {
-				String s3FileName = (String) fileNames.nextElement();//태그이름을 받아온다
-				String s3ChangedFileName = mr1.getFilesystemName(s3FileName);//저장될 파일명을 받아온다.
-				//파일이 있을시에만 경로와 파일명을 추가
-				if (s3ChangedFileName != null) {
-					files += "../upload/" + s3ChangedFileName + ",";
+		String filesPath(MultipartRequest mr1, Enumeration fileNames) {
+			String files = "";
+			ArrayList<String> list = new ArrayList();
+			if (fileNames != null) {
+				while (fileNames.hasMoreElements()) {
+					String s3FileName = (String) fileNames.nextElement();//태그이름을 받아온다
+
+					String s3ChangedFileName = mr1.getFilesystemName(s3FileName);//저장될 파일명을 받아온다.
+
+					//파일이 있을시에만 경로와 파일명을 추가
+					if (s3ChangedFileName != null) {
+						//files += "../upload/" + s3ChangedFileName + ",";
+						list.add("../upload/" + s3ChangedFileName + ",");
+					}
+				}
+				Collections.reverse(list);
+				for (String s : list) {
+					files += s;
 				}
 			}
+			return files;
 		}
-		return files;
+	
+	//썸네일
+	String getThumbnailPath(String draw , String files , int thumbNum){
+		
+		String[] thumbPath = files.split(",");
+		if(thumbNum >= 0){
+			return thumbPath[thumbNum];
+		}else{
+			return draw;
+		}
+		
 	}
 %>
 
@@ -95,31 +117,40 @@
 	vo.setPdraw(draw);
 	
 	String files="";
-	Enumeration names = mr1.getFileNames();
-	files = filesPath(mr1, names);
 	
-	/* if(names != null){
-		out.println("names : ");
-		while(names.hasMoreElements()){
-			String s3FileName = (String)names.nextElement();//태그이름을 받아온다
-			String s3ChangedFileName = mr1.getFilesystemName(s3FileName);//저장될 파일명을 받아온다.
-			//파일이 있을시에만 경로와 파일명을 추가
-			if(s3ChangedFileName != null){
-				files += "../upload/"+s3ChangedFileName + ",";
-			}
+	if(mr1.getParameterValues("checkBoxes") != null){
+		String[] keepimg = mr1.getParameterValues("checkBoxes");
+		for(String k : keepimg){
+			files += k;
+			//out.println(k+"<br/>");
 		}
-		out.println(files+"<br/>");
-	} */
+	}
+	
+	Enumeration names = mr1.getFileNames();
+	files += filesPath(mr1, names);
 	
 	//이미지 파일을 넣지 않은 경우
 	if(files != ""){
 		vo.setPfile(files);
 	}
 	
+	//썸네일
+	int thumbNum = -1;
+	String thumbnail = vo.getPthumbnail();
+	if (mr1.getParameter("thumb") != null) {
+		//thumbNum = -1;
+		thumbNum = Integer.parseInt( mr1.getParameter("thumb") );
+		out.println("thumb : " + mr1.getParameter("thumb") + "<br/>");
+		thumbnail = getThumbnailPath(draw, files, thumbNum);
+	}
+	
+	vo.setPthumbnail(thumbnail);
+	
 	//DAO로 (pno를 사용해서) 테이블 내용 변경시키기
 	dao.updateOne(vo); 
 	
 	out.println(mr1.getParameter("pno"));
+	
 	
 	//이후 메인이동으로 바꿀 예정
 	response.sendRedirect("TempList.jsp");

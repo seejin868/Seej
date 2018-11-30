@@ -32,7 +32,7 @@
 			</div>
 			<div id="fileDiv">
 				<input type="button" value=" 파일추가 " id="addTagButton" />
-				이미지파일 <br /> <input type="file" name="file[]" id="file"  />
+				이미지파일 <br />
 				
 			</div>
 
@@ -48,7 +48,8 @@
 				<canvas name="canvas" id="canvas" width="790" height="400"></canvas>
 				<script src="canvas.js"></script>
 			</div>
-			<!-- <input type="hidden" id='canvasUrl' /> -->
+			<input type="radio" name="thumb" value="-1" />
+
 
 			<div id="buttons">
 				<input type="button" value="작성" name="ok" id="ok" /> 

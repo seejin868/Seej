@@ -11,23 +11,25 @@ public class PostimgVO {
 	int plike;
 	int phit;
 	String pdate;
+	String pthumbnail;
 		
 	public PostimgVO() {
 		// TODO Auto-generated constructor stub
 	}
 	//추가시
-	public PostimgVO(String ptitle, String pwriter, String pcontent, String pdraw, String pfile) {
+	public PostimgVO(String ptitle, String pwriter, String pcontent, String pdraw, String pfile,String pthumbnail) {
 		super();
 		this.ptitle = ptitle;
 		this.pwriter = pwriter;
 		this.pcontent = pcontent;
 		this.pdraw = pdraw;
 		this.pfile = pfile;
+		this.pthumbnail = pthumbnail;
 	}
 	
 	//select
 	public PostimgVO(int pno, String ptitle, String pwriter, String pcontent, String pdraw, String pfile, int plike,
-			int phit, String pdate) {
+			int phit, String pdate, String pthumbnail) {
 		super();
 		this.pno = pno;
 		this.ptitle = ptitle;
@@ -38,7 +40,9 @@ public class PostimgVO {
 		this.plike = plike;
 		this.phit = phit;
 		this.pdate = pdate;
+		this.pthumbnail = pthumbnail;
 	}
+	
 	public int getPno() {
 		return pno;
 	}
@@ -92,6 +96,12 @@ public class PostimgVO {
 	}
 	public void setPdate(String pdate) {
 		this.pdate = pdate;
+	}
+	public String getPthumbnail() {
+		return pthumbnail;
+	}
+	public void setPthumbnail(String pthumbnail) {
+		this.pthumbnail = pthumbnail;
 	}
 	
 	
