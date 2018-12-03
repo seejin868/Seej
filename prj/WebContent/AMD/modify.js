@@ -100,6 +100,9 @@
 			var a = $("#A").val();
 			console.log(a);
 			changeColor(r,g,b,a);
+			
+			$("#colorBox").css('background' , "rgba(" +r+ "," +g+ "," +b+ "," +a+ ")");
+			
 		});
 		
 		//선 굵기 변경

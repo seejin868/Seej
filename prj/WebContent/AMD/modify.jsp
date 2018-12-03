@@ -31,7 +31,7 @@
 
 <script type="text/javascript" src="modify.js" ></script>
 
-<link rel="stylesheet" href="add.css">
+<link rel="stylesheet" href="modify.css">
 
 </head>
 <body>
@@ -60,6 +60,7 @@
 						out.println("<input type='checkbox' name='checkBoxes' id='checkBoxes' checked='checked' value='"+src+"' /> <br/>");
 					}
 				%>
+				<h6>파일의 왼쪽에 있는 버튼으로 선택한 이미지가 섬네일이 됩니다</h6>
 				<input type="button" value=" 파일추가 " id="addTagButton" />
 				이미지파일 <br />
 			</div>
@@ -69,7 +70,10 @@
 			R <input type="range" class="slider" id="R" min="0" max="255" value="0" />
 			G <input type="range" class="slider" id="G" min="0" max="255" value="0" />
 			B <input type="range" class="slider" id="B" min="0" max="255" value="0" />
-			A <input type="range" class="slider" id="A" min="0" max="1"  step="0.1" value="1" /><br />
+			A <input type="range" class="slider" id="A" min="0" max="1"  step="0.1" value="1" />
+			
+			<span id="colorBox" ></span>
+			<br />
 			두께
 			<input type="range" class="slider" id="thickRange" min="1" value="1" max="20"/>
 			<div id="draw">

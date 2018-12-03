@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+
 *{
 	margin: 0;
 	padding: 0;
@@ -37,7 +38,7 @@ div{
 	background-color: white;
 }
 
-/* 컬러박스 */
+
 #colorBox{
 	position : relative;
 	float :left;

@@ -15,7 +15,17 @@
 
 <style type="text/css">
 
+form{
+	background-color: yellow;
+}
+#div1{
+height : 100px;
+	background-color: pink;
+}
+
 </style>
+
+<div id="div1" ></div>
 
 <form action="#">
 <input type="checkbox" name="c" value="a" />

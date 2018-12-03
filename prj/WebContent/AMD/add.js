@@ -79,8 +79,12 @@
 			document.frm.submit();
 
 		});
+		
 		//색변경
 		$("#R,#G,#B,#A").change(function() {
+			
+			console.log( $("#colorBox").val() );
+			
 			console.log("ok");
 			var r = $("#R").val();
 			var g = $("#G").val();
@@ -88,6 +92,10 @@
 			var a = $("#A").val();
 			console.log(a);
 			changeColor(r,g,b,a);
+			
+			//컬러박스
+			$("#colorBox").css('background' , "rgba(" +r+ "," +g+ "," +b+ "," +a+ ")");
+			
 		});
 		
 		//선 굵기 변경
