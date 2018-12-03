@@ -22,6 +22,10 @@
 	//폴더 내의 파일삭제
 //	deleteFiles delFile = new deleteFiles();
 //	delFile.delete(uploadDir, drawsDir);
+
+	deleteFiles delfile = new deleteFiles();
+	
+	delfile.deleteFiles(application.getRealPath(""));
 	
 	
 	//이후 메인이동으로 바꿀 예정

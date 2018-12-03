@@ -6,7 +6,6 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="java.io.File"%>
 <%@page import="java.util.Enumeration"%>
-<%@page import="check.NameChecker"%>
 <%@page import="vo.PostimgVO"%>
 <%@page import="dao.PostimgDAO"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
@@ -156,6 +155,7 @@
 	out.println("draw : " + draw + "<br/>");
 	out.println("files : " + files + "<br/>");
 	out.println("P_No" + dao.getSeqLastNum() + "<br/>");
+	out.println("PATH" + application.getRealPath("") + "<br/>");
 %>
 
 <img src="<%=draw%>" alt="이미지" />
