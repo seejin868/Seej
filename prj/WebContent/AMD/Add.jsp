@@ -28,7 +28,6 @@
 
 </head>
 <body>
-
 	<div id="formwrapper">
 		<form action="" id="frm" name="frm" enctype="multipart/form-data">
 			<input type="hidden" value="<%=session.getAttribute("id")%>"

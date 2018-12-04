@@ -8,16 +8,18 @@
 	$(function(){
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef : oEditors,
+			//스마트에디터에 id설정
 			elPlaceHolder : "content",
+			//경로 설정
 			sSkinURI : "../se/SmartEditor2Skin.html",
 			fCreator : "createSEditor2"
 		});
-		
 	});
 
 	//스마트 에디터 textarea에 작성한 데이터 전달하기
 	function submitContents(elClickedObj) {
 		// 에디터의 내용이 textarea에 적용된다.
+		//id 설정
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
 		// 에디터의 내용에 대한 값 검증은 이곳에서
 		// document.getElementById("ir1").value를 이용해서 처리한다.
@@ -156,7 +158,5 @@
        
         },false);
 
-       
-   
     }
 	

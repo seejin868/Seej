@@ -99,6 +99,7 @@
 
 			그림그리기 <input type="button" value="처음으로" id='init'/>
 			<input type="button" value="완전 리셋" id='reset'/><br />
+			<!-- 그림 그릴시 색이나 선 두께 등을 변경 -->
 			<b id="fontR">R</b> 
 			<input type="range" class="slider" id="R" min="0" max="255" value="0" />
 			<b id="fontG">G</b> 
@@ -107,7 +108,7 @@
 			<input type="range" class="slider" id="B" min="0" max="255" value="0" />
 			<b id="fontA">A</b> 
 			<input type="range" class="slider" id="A" min="0" max="1"  step="0.1" value="1" />
-			
+			<!-- 컬러박스 -->
 			<span id="colorBox" ></span>
 			<br />
 			두께
@@ -119,7 +120,7 @@
 			<input type="radio" name="thumb" value="-1" />
 
 			<div id="buttons">
-				<input type="button" value="작성" name="ok" id="ok" /> 
+				<input type="button" value="수정" name="ok" id="ok" /> 
 				<input type="button" value="취소" name="cancel" id="cancel" />
 				<input type="button" value="삭제" name="del" id="del" />
 				

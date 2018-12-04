@@ -9,6 +9,8 @@ div{
 }
 
 #formwrapper {
+	position: relative;
+	top : 20px;
 	border: 1px solid gray;
 	margin: auto;
 	width: 800px

@@ -7,13 +7,12 @@
 
 var canvas, ctx;
 
-
 window.onload = function() {
 	
 	canvas = document.getElementById("canvas");
 	ctx = canvas.getContext("2d");
 	
-
+/*리스너 추가*/
 	canvas.addEventListener("mousedown", listener);
 	canvas.addEventListener("mousemove", listener);
 	canvas.addEventListener("mouseup", listener);

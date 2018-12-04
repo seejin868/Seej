@@ -128,7 +128,7 @@
 	//canvas 덮어쓰기
 	//canvas의 그림을 dataURL => byte[] => png로 바꾼다		
 	String dataUrl = mr1.getParameter("canvasUrl");
-	//dataURL을 변환 저장후 (상대)경로를 받아온다.
+	//dataURL을 변환 저장후 (상대)경로를 받아서 저장 후, vo에 저장한다.
 	String draw = saveDrawAndReturnPath(saveDirDraws, pno, dataUrl);
 	vo.setPdraw(draw);
 	
@@ -141,7 +141,7 @@
 		
 		String[] keepimg = mr1.getParameterValues("checkBoxes");
 		for(String k : keepimg){
-			//그 값들을 file변수에 저장한다.
+			//그 값들을 file변수에 저장한다. 여럿일 때를 위해 ,로 구분
 			file += k+",";
 			//out.println("check : "+k+"<br/>");
 		}

@@ -12,7 +12,7 @@
 
 //dao
 	PostimgDAO dao = new PostimgDAO();
-
+//pno
 	int pno = Integer.parseInt(mr1.getParameter("pno"));
 	
 	//db에서 제거

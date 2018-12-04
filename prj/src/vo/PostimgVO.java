@@ -2,20 +2,23 @@ package vo;
 
 public class PostimgVO {
 	
-	int pno;
-	String ptitle;
-	String pwriter;
-	String pcontent;
-	String pdraw;
-	String pfile;
-	int plike;
-	int phit;
-	String pdate;
-	String pthumbnail;
-		
+	
+	int pno;			// 게시글 번호 primary key
+	String ptitle;		// 제목
+	String pwriter;		// 작성자(id)
+	String pcontent;	// 글 내용
+	String pdraw;		// 캔버스 그림 위치
+	String pfile;		// 이미지 파일 위치 ,로 구분
+	int plike;			// 추천수
+	int phit;			// 조회수
+	String pdate;		// 작성일
+	String pthumbnail;	// 썸네일
+	
+	//생성자	
 	public PostimgVO() {
 		// TODO Auto-generated constructor stub
 	}
+	
 	//추가시
 	public PostimgVO(String ptitle, String pwriter, String pcontent, String pdraw, String pfile,String pthumbnail) {
 		super();
@@ -27,7 +30,7 @@ public class PostimgVO {
 		this.pthumbnail = pthumbnail;
 	}
 	
-	//select
+	//select시
 	public PostimgVO(int pno, String ptitle, String pwriter, String pcontent, String pdraw, String pfile, int plike,
 			int phit, String pdate, String pthumbnail) {
 		super();
@@ -43,6 +46,8 @@ public class PostimgVO {
 		this.pthumbnail = pthumbnail;
 	}
 	
+	
+	//get, set
 	public int getPno() {
 		return pno;
 	}
