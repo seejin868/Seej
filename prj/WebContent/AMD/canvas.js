@@ -1,9 +1,9 @@
 
-window.onload = function() {
+/*window.onload = function() {
 	var canvas = document.getElementById("canvas");
 	
 	draw(canvas);
-}
+}*/
 
 var canvas, ctx;
 
@@ -11,7 +11,6 @@ window.onload = function() {
 	canvas = document.getElementById("canvas");
 	ctx = canvas.getContext("2d");
 	
-	//ctx.strokeStyle="yellow" 색바꾸기
 
 	canvas.addEventListener("mousedown", listener);
 	canvas.addEventListener("mousemove", listener);
@@ -19,12 +18,13 @@ window.onload = function() {
 	canvas.addEventListener("mouseout", listener);
 }
 
+/*
 function draw(canvas) {
 	var ctx = canvas.getContext("2d");
 	ctx.moveTo(30, 100);
 	ctx.lineTo(80, 100);
 	ctx.stroke();
-}
+}*/
 
 var pos = {
 	drawble : false,

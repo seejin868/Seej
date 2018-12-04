@@ -7,11 +7,20 @@
 <head>
 <meta charset="UTF-8">
 <title>modify</title>
+
 <%
-//추가해야할 것 들 취소버튼누르면 메인으로 이동
+
+	//id를 받지 못한 경우 메인으로 이동시키기(현재는 임시페이지)
+	  	if(session.getAttribute("id") == null){
+			response.sendRedirect("TempList.jsp");
+			return ;
+		} 
+ 
+	
+
 	//pno를 받는다
 	String ParaPno = request.getParameter("pno");
-
+	
 	//pno가 없는 경우 메인으로 이동
 	if(ParaPno == null){
 		response.sendRedirect("TempList.jsp");//나중에 메인페이지로 바꿀 예정
@@ -20,8 +29,18 @@
 	
 	PostimgDAO dao = new PostimgDAO();
 	
+	//pno를 정수형으로 변환
 	int pno = Integer.parseInt( ParaPno );
-	PostimgVO vo =  dao.getOne(pno);//pno로 받아온 vo객체를 받아온다
+	PostimgVO vo =  dao.getOne(pno);//pno로 vo객체를 받아온다
+	
+	//id가 작성자와 다른 경우 메인으로 이동시키기(현재는 임시페이지)
+  	if( session.getAttribute("id").equals( (String)vo.getPwriter() ) ){
+	}else{
+		response.sendRedirect("TempList.jsp");
+		return ;
+	} 
+
+	//이미지 파일의 경로를 분리시켜서 배열에 저장
 	String[] filePath = vo.getPfile().split(",");
 	
 %>
@@ -37,11 +56,13 @@
 <body>
 
 	<div id="formwrapper">
+	
 		<form action="" id="frm" name="frm" enctype="multipart/form-data">
 			<input type="hidden" value='<%=session.getAttribute("id")%>'
 				name="id" />
 			<!--세션으로 id 받는 부분  -->
 			<div>
+			<!-- p_no, p_draw -->
 				<input type="hidden" name="pno" value="<%=vo.getPno() %>" />
 				<input type="hidden" id="drawPath" value="<%=vo.getPdraw() %>" />
 				제목 <br /> <input type="text" name="title" id="title" value="<%=vo.getPtitle() %>"/>
@@ -54,6 +75,7 @@
 			<div id="fileDiv">
 			체크 해제시 DB에서 삭제 <br />
 				<%
+					//원래 있던 이미지 표시
 					int i = 0;
 					for(String src:filePath){
 						out.println("<img src='"+src+"' height='100'>");

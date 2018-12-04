@@ -2,7 +2,6 @@
 <%@page import="java.util.Collections"%>
 <%@page import="java.util.Enumeration"%>
 <%@page import="vo.PostimgVO"%>
-<%@page import="check.NameChecker"%>
 <%@page import="drawChanger.PngFileMaker"%>
 <%@page import="drawChanger.Base64Utils"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
@@ -15,7 +14,7 @@
 <%!//draw 덮어쓰기 메소드
 	String saveDrawAndReturnPath(String saveDirDraws, int pno, String dataUrl) {
 
-		PostimgDAO dao = new PostimgDAO();
+		//PostimgDAO dao = new PostimgDAO();
 		
 		byte[] bt = Base64Utils.decodeBase64ToBytes(dataUrl);
 
@@ -50,8 +49,9 @@
 			String files = "";
 			ArrayList<String> list = new ArrayList();
 			if (fileNames != null) {
+				//fileNames에 다른 요소들이 남아있는 경우 반복
 				while (fileNames.hasMoreElements()) {
-					String s3FileName = (String) fileNames.nextElement();//태그이름을 받아온다
+					String s3FileName = (String) fileNames.nextElement();//input:file태그의 이름(name)을 받아온다
 
 					String s3ChangedFileName = mr1.getFilesystemName(s3FileName);//저장될 파일명을 받아온다.
 
@@ -61,49 +61,63 @@
 						list.add("../upload/" + s3ChangedFileName + ",");
 					}
 				}
+				//list 요소들의 순서를 반전시킨다
 				Collections.reverse(list);
 				for (String s : list) {
-					files += s;
+					files += s;//반전시킨 list를 순서대로 files변수에 저장한다
 				}
 			}
+			//리턴
 			return files;
 		}
+
 	
-	//썸네일
-	String getThumbnailPath(String draw , String files , int thumbNum){
-		
-		String[] thumbPath = files.split(",");
-		if(thumbNum >= 0){
-			return thumbPath[thumbNum];
-		}else{
-			return draw;
+	//썸네일2
+		String getThumbnailPath2(
+				MultipartRequest mr1, Enumeration fileNames, String draw, int thumbNum) {
+
+			ArrayList<String> list = new ArrayList();
+
+			if (fileNames != null) {
+
+				while (fileNames.hasMoreElements()) {
+					String s3FileName = (String) fileNames.nextElement();//input:file태그의 이름을 받아온다
+					String s3ChangedFileName = mr1.getFilesystemName(s3FileName);//저장될 파일명을 받아온다.
+
+					//리스트에 추가
+					list.add("../upload/" + s3ChangedFileName);
+				}
+				//반전
+				Collections.reverse(list);
+			}
+			//thumbNum이 0이상이면서 list의 thumbNum번째에 저장된 문자열이 "../upload/null"이 아닐 시에만
+			if (thumbNum >= 0 && ( false == list.get(thumbNum).equals("../upload/null") ) ) {
+				return list.get(thumbNum); //list에서 thumbNum번 요소를 리턴 시킨다
+			} else {
+				//그 외의 경우 draw를 반환해준다
+				return draw;
+			}
+
 		}
-		
-	}
 %>
 
 
 <%
-	//dao, vo
-	PostimgDAO dao = new PostimgDAO();
-	//dao.getOne( Integer.parseInt( request.getParameter("pno") ) );
+	
 
 	int maxFileSize = 1024 * 1024 * 10; //최대 크기 10MB
 
-	String saveDirUpload = application.getRealPath("upload");//이미지파일을 저장할 폴더 경로
-	String saveDirDraws = application.getRealPath("draws");//그린 이미지를 저장할 폴더 경로
+	String saveDirUpload = application.getRealPath("upload"); //이미지파일을 저장할 폴더 경로
+	String saveDirDraws = application.getRealPath("draws"); //그린 이미지를 저장할 폴더 경로
 	MultipartRequest mr1 = new MultipartRequest(request, saveDirUpload, maxFileSize, "UTF-8",
 			new DefaultFileRenamePolicy());
 	
+	 
+	//dao, vo
+	PostimgDAO dao = new PostimgDAO();
+	//pno로 DB에 조회해서 글 내용을 얻어온다
 	int pno = Integer.parseInt( mr1.getParameter("pno") );
-
-	
 	PostimgVO vo = dao.getOne(pno);
-	
-	//파일이름
-	String imgFileName =null;
-	//파일
-	String file = null;
 	
 	//제목과 본문내용 vo에 넣기
 	vo.setPtitle(mr1.getParameter("title"));
@@ -113,21 +127,29 @@
 	//canvas 덮어쓰기
 	//canvas의 그림을 dataURL => byte[] => png로 바꾼다		
 	String dataUrl = mr1.getParameter("canvasUrl");
+	//dataURL을 변환 저장후 (상대)경로를 받아온다.
 	String draw = saveDrawAndReturnPath(saveDirDraws, pno, dataUrl);
 	vo.setPdraw(draw);
 	
-	String files="";
-	
+	//이미지파일
+	String file = "";
+	//체크박스에 체크된 요소가 있다면
+	//out.println(mr1.getParameterValues("checkBoxes"));
 	if(mr1.getParameterValues("checkBoxes") != null){
+		
 		String[] keepimg = mr1.getParameterValues("checkBoxes");
 		for(String k : keepimg){
-			files += k;
-			//out.println(k+"<br/>");
+			//그 값들을 files변수에 저장한다.
+			file += k;
+			out.println("check : "+k+"<br/>");
 		}
 	}
 	
 	Enumeration names = mr1.getFileNames();
+	String files = "";
 	files += filesPath(mr1, names);
+	file += filesPath(mr1, names);
+
 	
 	//이미지 파일을 넣지 않은 경우
 	if(files != ""){
@@ -136,21 +158,34 @@
 	
 	//썸네일
 	int thumbNum = -1;
-	String thumbnail = vo.getPthumbnail();
+	String thumbnail = vo.getPthumbnail();//원래의 썸네일을 넣는다
+	out.println(thumbNum);
+	out.println(thumbnail);
+	//얻어온 thumb이 null이 아니면 실행한다
 	if (mr1.getParameter("thumb") != null) {
-		//thumbNum = -1;
+		//얻어온 thumb을 정수형으로 바꿔서 저장
 		thumbNum = Integer.parseInt( mr1.getParameter("thumb") );
-		out.println("thumb : " + mr1.getParameter("thumb") + "<br/>");
-		thumbnail = getThumbnailPath(draw, files, thumbNum);
+		//썸네일 번호가 -1이면 캔버스에 그린 그림을 0이상 이면 그 이미지를 썸네일로 해서 저장
+	//	thumbnail = getThumbnailPath(draw, files, thumbNum);
+		
+ 		Enumeration fileNames = mr1.getFileNames();
+		thumbnail = getThumbnailPath2( mr1, fileNames, draw, thumbNum);
 	}
 	
+	//vo에 썸네일을 넣는다
 	vo.setPthumbnail(thumbnail);
 	
-	//DAO로 (pno를 사용해서) 테이블 내용 변경시키기
+	//DAO로  테이블 내용 변경시키기
 	dao.updateOne(vo); 
 	
-	out.println(mr1.getParameter("pno"));
-	
+	/* 
+	out.println(thumbNum);
+	out.println("<br/>");
+	out.println("썸네일"+thumbnail);
+	out.println("<br/>");
+	out.println(file);
+	out.println("<br/>");
+	out.println(files); */
 	
 	//이후 메인이동으로 바꿀 예정
 	response.sendRedirect("TempList.jsp");

@@ -1,4 +1,3 @@
-
 <%@page import="java.util.Collections"%>
 <%@page import="java.util.Collection"%>
 <%@page import="java.util.ArrayList"%>
@@ -14,6 +13,7 @@
 <%@page import="drawChanger.Base64Utils"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 
 <%!//draw 저장 메소드
 	String saveDrawAndReturnPath(String saveDirDraws, String dataUrl) {
@@ -75,14 +75,14 @@
 
 	//썸네일
 	String getThumbnailPath(
-			MultipartRequest mr1, Enumeration fileNames, String draw, String files, int thumbNum) {
+			MultipartRequest mr1, Enumeration fileNames, String draw, int thumbNum) {
 
 		ArrayList<String> list = new ArrayList();
 
 		if (fileNames != null) {
 
 			while (fileNames.hasMoreElements()) {
-				String s3FileName = (String) fileNames.nextElement();//태그이름을 받아온다
+				String s3FileName = (String) fileNames.nextElement();//input:file태그의 이름을 받아온다
 				String s3ChangedFileName = mr1.getFilesystemName(s3FileName);//저장될 파일명을 받아온다.
 
 				//리스트에 추가
@@ -90,15 +90,17 @@
 			}
 			//반전
 			Collections.reverse(list);
-
 		}
+		//thumbNum이 0이상이면서 list의 thumbNum번째에 저장된 문자열이 "../upload/null"이 아닐 시에만
 		if (thumbNum >= 0 && ( false == list.get(thumbNum).equals("../upload/null") ) ) {
-			return list.get(thumbNum);
+			return list.get(thumbNum); //list에서 thumbNum번 요소를 리턴 시킨다
 		} else {
+			//그 외의 경우 draw를 반환해준다
 			return draw;
 		}
 
-	}%>
+	}
+%>
 
 <%
 	//널값인 경우 설정 하자(일단은 나중에)
@@ -136,8 +138,8 @@
 	if (mr1.getParameter("thumb") != null) {
 		//thumbNum = -1;
 		thumbNum = Integer.parseInt( mr1.getParameter("thumb") );
-		out.println("thumb : " + mr1.getParameter("thumb") + "<br/>");
-		thumbnail = getThumbnailPath( mr1, mr1.getFileNames(), draw, files, thumbNum);
+		//out.println("thumb : " + mr1.getParameter("thumb") + "<br/>");
+		thumbnail = getThumbnailPath( mr1, mr1.getFileNames(), draw, thumbNum);
 	}
 
 	PostimgVO vo = new PostimgVO(title, writer, content, draw, files, thumbnail);
@@ -146,7 +148,7 @@
 	//DB에 추가
 	dao.addData(vo);
 
-	out.println("thumbnail : " + thumbnail + "<br/>");
+/* 	out.println("thumbnail : " + thumbnail + "<br/>");
 	out.println("thumbNum : " + thumbNum + "<br/>");
 	out.println("vo.getpthubnail : " + vo.getPthumbnail() + "<br/>");
 	out.println("title : " + title + "<br/>");
@@ -155,19 +157,23 @@
 	out.println("draw : " + draw + "<br/>");
 	out.println("files : " + files + "<br/>");
 	out.println("P_No" + dao.getSeqLastNum() + "<br/>");
-	out.println("PATH" + application.getRealPath("") + "<br/>");
+	out.println("PATH" + application.getRealPath("") + "<br/>"); */
 %>
-
+<%-- 
 <img src="<%=draw%>" alt="이미지" />
-<%-- <img src="<%=file%>" alt="이미지" /> --%>
-
+ <img src="<%=file%>" alt="이미지" /> 
+ --%>
 <%
 	//files에 저장된 경로(,로 구분됨)를 나눠서 반복문으로 그림을 출력
-	String[] filePath = files.split(",");
+	/* String[] filePath = files.split(",");
 	for (String imgPath : filePath) {
 
 		out.println("<img src='" + imgPath + "' alt='실험기'  />");
 
-	}
+	} */
+	
+	//메인페이지로 이동(현재는 임시 페이지)
+	response.sendRedirect("TempList.jsp");
+	
 %>
 <!-- AMD폴더에서 나온후 draws폴더에서 이미지파일을 찾는다 -->

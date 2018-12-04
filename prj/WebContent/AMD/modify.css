@@ -26,7 +26,7 @@ div{
 	background-color: white;
 }
 
-#ok, #cancel{
+#ok, #cancel, #del{
 	width : 100px;
 	height: 25px;
 	background-color: white;

@@ -62,6 +62,12 @@
 			document.frm.submit();
 		});
 		
+		//취소버튼을 클릭하면 페이지 이동
+		$("#cancel").click(function() {
+			//합칠 시 메인 페이지로 변경 (현재는 임시 페이지)
+			location.href = "TempList.jsp";
+		});
+		
 		//ok버튼을 클릭하면 전송
 		$("#ok").click(function() {
 			console.log(ok);
@@ -93,12 +99,12 @@
 		
 		//색변경
 		$("#R,#G,#B,#A").change(function() {
-			console.log("ok");
+		//	console.log("ok");
 			var r = $("#R").val();
 			var g = $("#G").val();
 			var b = $("#B").val();
 			var a = $("#A").val();
-			console.log(a);
+		//	console.log(a);
 			changeColor(r,g,b,a);
 			
 			$("#colorBox").css('background' , "rgba(" +r+ "," +g+ "," +b+ "," +a+ ")");
@@ -108,7 +114,7 @@
 		//선 굵기 변경
 		$("#thickRange").change(function() {
 			var thickness = $(this).val();
-			console.log(thickness);
+			//console.log(thickness);
 			changeThicknessLine(thickness);
 		});
 		
@@ -136,7 +142,7 @@
 	function firstDraw(){
         //이미지 객체 생성
         var imgClo = new Image();
-//        imgClo.src= '<%=vo.getPdraw() %>' ;
+
         imgClo.src= $("#drawPath").val();
         
         //페이지 로드후 이미지가 로드 되었을 때 이미지 출력
@@ -145,13 +151,10 @@
             var cvs = document.getElementById('canvas');
             var ctx = cvs.getContext("2d");
 
-            //canvas.drawImage() 함수를 사용하여 이미지 출력
-            //drawImage ( image sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
             ctx.drawImage( imgClo , 0, 0, cvs.width, cvs.height);
        
         },false);
 
-        //이미지 경로 설정
        
    
     }

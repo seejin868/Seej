@@ -11,7 +11,6 @@
 </head>
 
 <body>
-
 	<%
 		//실험을 위해 만든 임시 리스트
 		PostimgDAO dao = new PostimgDAO();
