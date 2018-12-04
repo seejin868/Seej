@@ -46,6 +46,19 @@ div{
 	height : 15px;
 	background-color: black;
 }
+/* 색변경용 슬라이더 옆 RGBA문자 색추가 */
+#fontR{
+	color: red;
+}
+ #fontG {
+	color: green;
+}
+#fontB {
+	color: blue;
+}
+#fontA{
+	color: gray;
+}
 
 
 .slider{

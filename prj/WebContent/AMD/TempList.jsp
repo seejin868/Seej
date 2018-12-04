@@ -11,7 +11,12 @@
 </head>
 
 <body>
+	<a href="Add.jsp">글 추가</a><br />
 	<%
+	
+		session.setAttribute("id", "new");
+	out.println(session.getAttribute("id"));
+		
 		//실험을 위해 만든 임시 리스트
 		PostimgDAO dao = new PostimgDAO();
 		ArrayList<PostimgVO> list = dao.getAll();

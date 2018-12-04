@@ -121,6 +121,7 @@
 		//리셋버튼을 누르면 화면지우기
 		$("#reset").click( resetCanvas );
 		
+		//처음으로 버튼 누를시 맨처음 그림을 다시 불러온다
 		$("#init").click(function(){
 			resetCanvas();
 			firstDraw();
@@ -142,7 +143,7 @@
 	function firstDraw(){
         //이미지 객체 생성
         var imgClo = new Image();
-
+        //이미지 불러오기(jsp파일에 hidden으로 넣어놓은 것을 불러옴)
         imgClo.src= $("#drawPath").val();
         
         //페이지 로드후 이미지가 로드 되었을 때 이미지 출력

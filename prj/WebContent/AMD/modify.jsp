@@ -11,10 +11,12 @@
 <%
 
 	//id를 받지 못한 경우 메인으로 이동시키기(현재는 임시페이지)
-	  	if(session.getAttribute("id") == null){
+	   	if(session.getAttribute("id") == null){
 			response.sendRedirect("TempList.jsp");
 			return ;
-		} 
+		}  
+	  
+	  //out.println(session.getAttribute("id"));
  
 	
 
@@ -33,15 +35,20 @@
 	int pno = Integer.parseInt( ParaPno );
 	PostimgVO vo =  dao.getOne(pno);//pno로 vo객체를 받아온다
 	
+	
 	//id가 작성자와 다른 경우 메인으로 이동시키기(현재는 임시페이지)
-  	if( session.getAttribute("id").equals( (String)vo.getPwriter() ) ){
+	String id = (String)session.getAttribute("id");
+   	if( id.equals( vo.getPwriter() ) ){
 	}else{
 		response.sendRedirect("TempList.jsp");
 		return ;
-	} 
+	}  
 
 	//이미지 파일의 경로를 분리시켜서 배열에 저장
-	String[] filePath = vo.getPfile().split(",");
+	String[] filePath = null;
+	if(vo.getPfile() != null){
+		filePath = vo.getPfile().split(",");
+	}
 	
 %>
 <script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -58,7 +65,7 @@
 	<div id="formwrapper">
 	
 		<form action="" id="frm" name="frm" enctype="multipart/form-data">
-			<input type="hidden" value='<%=session.getAttribute("id")%>'
+			<input type="hidden" value='<%=id%>'
 				name="id" />
 			<!--세션으로 id 받는 부분  -->
 			<div>
@@ -75,24 +82,31 @@
 			<div id="fileDiv">
 			체크 해제시 DB에서 삭제 <br />
 				<%
+				//DB에 경로가 들어가 있던 경우만
+					if(filePath != null){
 					//원래 있던 이미지 표시
-					int i = 0;
-					for(String src:filePath){
-						out.println("<img src='"+src+"' height='100'>");
-						out.println("<input type='checkbox' name='checkBoxes' id='checkBoxes' checked='checked' value='"+src+"' /> <br/>");
+						//int i = 0;
+						for(String src:filePath){
+							out.println("<img src='"+src+"' height='100'>");
+							out.println("<input type='checkbox' name='checkBoxes' id='checkBoxes' checked='checked' value='"+src+"' /> <br/>");
+						}
 					}
 				%>
-				<h6>파일의 왼쪽에 있는 버튼으로 선택한 이미지가 섬네일이 됩니다</h6>
+				<h6>파일의 왼쪽에 있는 버튼으로 선택한 이미지가 섬네일이 됩니다(선택하지 않을 시 원래 선택했던 그림이 섬네일이 됩니다)</h6>
 				<input type="button" value=" 파일추가 " id="addTagButton" />
 				이미지파일 <br />
 			</div>
 
 			그림그리기 <input type="button" value="처음으로" id='init'/>
 			<input type="button" value="완전 리셋" id='reset'/><br />
-			R <input type="range" class="slider" id="R" min="0" max="255" value="0" />
-			G <input type="range" class="slider" id="G" min="0" max="255" value="0" />
-			B <input type="range" class="slider" id="B" min="0" max="255" value="0" />
-			A <input type="range" class="slider" id="A" min="0" max="1"  step="0.1" value="1" />
+			<b id="fontR">R</b> 
+			<input type="range" class="slider" id="R" min="0" max="255" value="0" />
+			<b id="fontG">G</b> 
+			<input type="range" class="slider" id="G" min="0" max="255" value="0" />
+			<b id="fontB">B</b> 
+			<input type="range" class="slider" id="B" min="0" max="255" value="0" />
+			<b id="fontA">A</b> 
+			<input type="range" class="slider" id="A" min="0" max="1"  step="0.1" value="1" />
 			
 			<span id="colorBox" ></span>
 			<br />

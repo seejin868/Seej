@@ -66,13 +66,14 @@
 			
 			//타이틀 부분이 없으면 경고창을 띄운다
 			if($('#title').val().trim() == "" ){
-				
+				//타이틀에 포커스
 				$("#title").focus();
 				alert("타이틀이 없습니다");
 				return;
 			}
 			//캔버스에서 dataURL을 얻어서 변수에 저장
 			var canvasUrl = document.getElementById("canvas").toDataURL();
+			
 			//input태그의 value에 canvasUrl을 넣는다
 			var input = $("<input>").attr('name', 'canvasUrl').val(canvasUrl);
 			input.attr('type','hidden');
@@ -111,7 +112,7 @@
 		//선 굵기 변경
 		$("#thickRange").change(function() {
 			var thickness = $(this).val();
-			//console.log(thickness);
+			//canvas.js의 함수 실행
 			changeThicknessLine(thickness);
 		});
 

@@ -49,10 +49,12 @@
 		return draw;
 	}
 
-	//파일들위치 메소드
+	//파일들의 경로(위치)를 반환하는 메소드
 	String filesPath(MultipartRequest mr1, Enumeration fileNames) {
+		//초기화
 		String files = "";
 		ArrayList<String> list = new ArrayList();
+		
 		if (fileNames != null) {
 			while (fileNames.hasMoreElements()) {
 				String s3FileName = (String) fileNames.nextElement();//태그이름을 받아온다
@@ -118,7 +120,9 @@
 
 	String title = mr1.getParameter("title");
 
-	String writer = mr1.getParameter("id"); //id를 받아온다 
+	String writer = mr1.getParameter("id"); //id를 받아온다
+			//(String)session.getAttribute("id"); 
+			// 
 
 	String content = mr1.getParameter("content");// 본문 내용을 받아온다
 

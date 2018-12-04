@@ -7,7 +7,9 @@
 
 var canvas, ctx;
 
+
 window.onload = function() {
+	
 	canvas = document.getElementById("canvas");
 	ctx = canvas.getContext("2d");
 	
@@ -34,20 +36,20 @@ var pos = {
 
 function listener(event) {
 	switch (event.type) {
-	case "mousedown":
+	case "mousedown":/*마우스를 누르면 그리기 시작*/
 		initDraw(event);
 		break;
-	case "mousemove":
+	case "mousemove":/*이동하면 선을 그린다*/
 		if (pos.drawable)
 			draw(event);
 		break;
-	case "mouseout":
+	case "mouseout":/*마우스가 캔버스에서 나가거나 마우스를 누르지 않으면 그리기 종료*/
 	case "mouseup":
 		finishDraw();
 		break;
 	}
 }
-
+/*초기화 및 현재위치 등 그리는 준비*/
 function initDraw(event) {
 	ctx.beginPath();
 	pos.drawable = true;
@@ -56,7 +58,7 @@ function initDraw(event) {
 	pos.Y = coors.Y;
 	ctx.moveTo(pos.X, pos.Y);
 }
-
+/*그리기*/
 function draw(event) {
 	var coors = getPosition(event);
 	ctx.lineTo(coors.X,coors.Y);
@@ -64,16 +66,19 @@ function draw(event) {
 	pos.Y = coors.Y;
 	ctx.stroke();
 }
-
+/*그리기 종료*/
 function finishDraw(){
 	pos.drawable = false;
 	pos.X = -1;
 	pos.Y = -1;
 }
-
+/*마우스 현재위치*/
 function getPosition(event) {
+	/*event.pageXY만 있는 경우는 캔버스가 배치된 위치만큼 어긋나있다 */
+	/*마우스의 현재 위치에서 캔버스의 위치를 뺀다*/
 	var x = event.pageX - canvas.offsetLeft;
 	var y = event.pageY - canvas.offsetTop;
+	
 	return {
 		X : x,
 		Y : y
