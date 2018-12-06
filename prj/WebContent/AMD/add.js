@@ -92,21 +92,16 @@
 		});
 		
 		//색변경
-		$("#R,#G,#B,#A").change(function() {//rgba를 변경해서
-			
-			//console.log( $("#colorBox").val() );
-			
-			//console.log("ok");
+		$("#R,#G,#B,#A").change(function() {//RGBA를 변경하면
 			var r = $("#R").val();
 			var g = $("#G").val();
 			var b = $("#B").val();
 			var a = $("#A").val();
-			//console.log(a);
+			//색변경
 			changeColor(r,g,b,a);
 			
-			//컬러박스
+			//컬러박스 색 변경
 			$("#colorBox").css('background' , "rgba(" +r+ "," +g+ "," +b+ "," +a+ ")");
-			
 		});
 		
 		//선 굵기 변경

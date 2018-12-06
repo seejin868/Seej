@@ -1,0 +1,187 @@
+@charset "UTF-8";
+#wrap{
+		position: relative;
+		width: 500px;
+		height: 600px;
+		min-height: 100%;
+		margin: 0 auto;
+	}
+	
+	div{display: block;}
+	body, button, input, select. table, textarea{
+		font-family: sans-serif;
+		font-size: 12px;
+	}
+	body, button, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6,
+	 input, legend, li, ol, p, select, table, td, textarea, th, ul {
+		margin: 0;
+		padding: 0;
+	}
+	h1 {
+		display: block;
+		font-size: 2em;
+		margin-block-start: 0.67em;
+	    margin-block-end: 0.67em;
+	    margin-inline-start: 0px;
+	    margin-inline-end: 0px;
+	    font-weight: bold;
+	}
+	#header .c_logo {
+		display: block;
+		overflow: hidden;
+		width: 240px;
+		height: 44px;
+		margin: 0 auto;
+		/* background-position: -1px -100px; */
+		background-image: url("../images/logo1.PNG");
+		background-size: 210px auto;
+		
+	}
+	a {
+		text-decoration: none;
+		
+	}
+	@media (max-width: 767px){
+	#header {
+    position: relative;
+    height: 102px;
+    padding: 46px 0 0;
+		}
+	}
+	@media (max-width: 767px){
+	#container, #header {
+    width: auto;
+    margin: 0 10px;
+		}
+	}
+	#header {
+		position: relative;
+		height: 102px;
+		padding: 46px 0 0 ;
+	}
+	
+		
+	#container{
+		padding-bottom: 76px;
+		min-height: 185px;
+	}
+	#container, #header {
+		width: auto;
+		margin: 0 10px;
+	}
+	
+	.blind {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+	}
+	
+	legend {
+    display: block;
+    padding-inline-start: 2px;
+    padding-inline-end: 2px;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+	}
+	
+	.btn_global {
+    display: block;
+    width: 100%;
+    height: 61px;
+    margin: 30px 0 14px;
+    padding-top: 1px;
+    border: none;
+    border-radius: 0;
+    background-color: #8041D9;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+    font-size: 20px;
+    line-height: 61px;
+    -webkit-appearance: none;
+}
+@media (max-width: 767px){
+	.input_row {
+    padding: 6px 35px 6px 10px;
+	}
+}	
+	.input_row {
+    position: relative;
+    height: 29px;
+    margin: 0 0 14px;
+    border: solid 1px #dadada;
+    background: #fff;
+}
+	.int {
+    font-size: 15px;
+    line-height: 16px;
+    position: relative;
+    z-index: 9;
+    width: 100%;
+    height: 16px;
+    padding: 7px 0 6px;
+    color: #000;
+    border: none;
+    background: #fff;
+    -webkit-appearance: none;
+}
+
+	@media (max-width: 1024px) {
+	.find_info {
+    font-size: 13px;
+	}
+}
+	.find_info {
+    font-size: 12px;
+    line-height: 14px;
+    padding-top: 20px;
+    text-align: center;
+    color: #8e8e8e;
+    border-top: 1px solid #e4e4e5;
+}
+
+	.login_form {
+    clear: both;
+}
+	fieldset, img {
+    border: 0;
+}
+	fieldset {
+	    margin-inline-start: 2px;
+	    margin-inline-end: 2px;
+	    padding-block-start: 0.35em;
+	    padding-inline-start: 0.75em;
+	    padding-inline-end: 0.75em;
+	    padding-block-end: 0.625em;
+	    min-inline-size: min-content;
+	   
+	}
+	
+	p {
+	display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+	}
+	
+	.error_pw {
+    font-size: 12px;
+    line-height: 16px;
+    margin: -2px 0 12px;
+    color: #ff1616;
+}
+	.error_id {
+    position: absolute;
+    top: 47px;
+    left: 0;
+    font-size: 12px;
+    line-height: 16px;
+    margin: -2px 0 12px;
+    color: #ff1616;
+}

@@ -1,0 +1,39 @@
+@charset "UTF-8";
+#regDiv{
+		width: 400px;
+		margin: 0 auto;
+	}
+	
+	table, tr, th, td{
+		border: 1px solid black;
+		border-collapse: collapse;
+		
+	}
+	
+	#botTr{
+		background-color: pink;
+	}
+	
+	#reg{
+		border-radius: 5px;
+		background-color: yellow;
+	}
+	
+	#mp0{
+		text-align: center;
+	}
+	
+	#msg, h5{
+		margin: 0;
+		padding: 0;
+		color: red;
+	}
+	
+		#msg1, h5{
+		margin: 0;
+		padding: 0;
+		color: red;
+	}
+	label {
+		color : red;
+	}

@@ -136,14 +136,12 @@
 	String file = "";
 	
 	//체크박스에 체크된 요소가 있다면
-	//out.println(mr1.getParameterValues("checkBoxes"));
 	if(mr1.getParameterValues("checkBoxes") != null){
 		
 		String[] keepimg = mr1.getParameterValues("checkBoxes");
 		for(String k : keepimg){
 			//그 값들을 file변수에 저장한다. 여럿일 때를 위해 ,로 구분
 			file += k+",";
-			//out.println("check : "+k+"<br/>");
 		}
 	}
 	

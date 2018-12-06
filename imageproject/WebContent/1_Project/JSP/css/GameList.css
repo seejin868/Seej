@@ -1,0 +1,104 @@
+@charset "UTF-8";
+/* body {
+	background: linear-gradient(to bottom, #EAEAEA, white );
+	background-repeat: no-repeat;
+} */
+#container {
+	margin: 0 auto;
+}
+#img_wrapper {
+	width: 90%;
+	margin: 0 auto;
+	text-align: center;
+}
+.game_div, .game_div_done {
+	text-align: center;
+	padding: 5px;
+	display: inline-block;
+	color: black;
+	padding-bottom: 5px;
+	border-radius: 10px;
+}
+.game_img, .game_img_done {
+	display: inline-block;
+	background-color: white;
+	width: 200px;
+	height: 300px;
+	cursor: pointer;
+	border-radius: 10px;
+	transition-duration: 0.3s;
+	transition-property: box-shadow, transform;
+	border: 2px solid lightgray;
+}
+.game_img_done {
+	background-color: #EAEAEA;
+	border: 2px solid #8C8C8C;
+}
+img {
+	width: 200px;
+	margin: 0 auto;
+}
+.game_title, .game_hit, .game_like {
+	margin-top: 5px;
+	visibility: hidden;
+}
+.game_hit, .game_like {
+	display: inline-block;
+}
+.hit_pointer {
+	width: 22px;
+}
+.like_thumbsUp {
+	width: 20px;
+}
+#add {
+	text-align: center;
+	padding-bottom: 10px;
+}
+#add_game, #add_answer {
+	text-align: center;
+	width: 35%;
+	margin: 0 auto;
+	border-radius: 10px;
+	transition-duration: 0.3s;
+	transition-property: box-shadow, transform;
+	display: inline-block;
+	height: 30px;
+	cursor: pointer;
+	background: linear-gradient(to bottom, #99ff00, #ffbf );
+}
+#add_answer {
+	width: 15%
+}
+h3 {
+	color: black;
+	margin: 0 auto;
+}
+a {
+	text-decoration: none;
+	color: black;
+}
+.game_div:hover .game_title, .game_div_done:hover .game_title {
+	visibility: visible;
+}
+.game_div:hover .game_hit, .game_div_done:hover .game_hit {
+	visibility: visible;
+}
+.game_div:hover .game_like, .game_div_done:hover .game_like {
+	visibility: visible;
+}
+.game_div:hover .game_img, .game_div_done:hover .game_img {
+	box-shadow: 0 15px 20px -10px rgba(0, 0, 0, 0.7);
+	background-color: #EAEAEA;
+}
+.game_div_done:hover .game_img_done {
+	box-shadow: 0 15px 20px -10px rgba(0, 0, 0, 0.7);
+	background-color: #A6A6A6;
+}
+#add_game:hover, #add_answer:hover {
+	box-shadow: 0 15px 20px -10px rgba(0, 0, 0, 0.7);
+	background: linear-gradient(to bottom, #F15F5F, #980000 );
+}
+h1 {
+	text-align: center;
+}

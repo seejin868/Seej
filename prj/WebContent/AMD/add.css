@@ -9,10 +9,9 @@ div{
 }
 
 #formwrapper {
-	position: relative;
-	top : 20px;
 	border: 1px solid gray;
-	margin: auto;
+	margin: 20px auto;
+	/* margin-top : 20px; */
 	width: 800px
 }
 

@@ -86,7 +86,7 @@
 					if(filePath != null){
 					//원래 있던 이미지 표시
 						//int i = 0;
-						for(String src:filePath){
+						for(String src : filePath){
 							out.println("<img src='"+src+"' height='100'>");
 							out.println("<input type='checkbox' name='checkBoxes' id='checkBoxes' checked='checked' value='"+src+"' /> <br/>");
 						}

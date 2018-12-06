@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+*{
+	margin: 0;
+	padding: 0;
+}
+div{
+	margin: auto;
+}
+
+#formwrapper {
+	border: 1px solid gray;
+	margin: auto;
+	width: 800px
+}
+
+/* 각 div에 넓이 설정  */
+#title, #draw, #file, #content {
+	width: 790px;
+}
+/* //버튼 div 가온데 정렬 */
+#buttons {
+	text-align: center;
+}
+/*버튼 흰색으로 변경*/
+#addTagButton, #reset{
+	background-color: white;
+}
+/* 작성버튼과 취소버튼 크기 색 변경 */
+#ok, #cancel{
+	width : 100px;
+	height: 25px;
+	background-color: white;
+}
+/* 캔버스 외곽선 등등 */
+#canvas {
+	border: 1px solid black;
+	margin: auto;
+	background-color: white;
+}
+
+/* 컬러박스 크기 위치 초기색 등등 */
+#colorBox{
+	position : relative;
+	float :left;
+	width :15px;
+	height : 15px;
+	background-color: black;
+}
+
+/* 색변경용 슬라이더 옆 RGBA문자 색 */
+#fontR{
+	color: red;
+}
+ #fontG {
+	color: green;
+}
+#fontB {
+	color: blue;
+}
+#fontA{
+	color: gray;
+}
+
+/*색변경 슬라이더 높이 외곽선 버튼크기 등등*/
+.slider{
+	-webkit-appearance : none;
+	border: 1px solid;
+	height: 10px;
+}
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 10px;
+    height: 10px;
+    border: 1px solid;
+}

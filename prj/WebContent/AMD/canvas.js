@@ -65,18 +65,23 @@ function draw(event) {
 	pos.Y = coors.Y;
 	ctx.stroke();
 }
+
 /*그리기 종료*/
 function finishDraw(){
 	pos.drawable = false;
 	pos.X = -1;
 	pos.Y = -1;
 }
+
 /*마우스 현재위치*/
 function getPosition(event) {
 	/*event.pageXY만 있는 경우는 캔버스가 배치된 위치만큼 어긋나있다 */
 	/*마우스의 현재 위치에서 캔버스의 위치를 뺀다*/
+	
 	var x = event.pageX - canvas.offsetLeft;
 	var y = event.pageY - canvas.offsetTop;
+	
+	
 	
 	return {
 		X : x,
@@ -85,7 +90,6 @@ function getPosition(event) {
 }
 //색변경
 function changeColor( r,g,b,a){
-	//ctx.strokeStyle = color;
 	ctx.strokeStyle = "rgba(" + r +","+ g +","+ b +"," + a +")";
 }
 //선 굵기 변경

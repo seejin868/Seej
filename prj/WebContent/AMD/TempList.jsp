@@ -15,7 +15,9 @@
 	<%
 	
 		session.setAttribute("id", "new");
-	out.println(session.getAttribute("id"));
+		out.println(request.getRealPath("")+"<br/>");
+		out.println("id = "+session.getAttribute("id")+"<br/>");
+		
 		
 		//실험을 위해 만든 임시 리스트
 		PostimgDAO dao = new PostimgDAO();
@@ -24,7 +26,9 @@
 		for (PostimgVO vo : list) {
 	%>
 		
-		<a href="modify.jsp?pno=<%=vo.getPno()%>"><%=vo.getPno() %> 번</a> <br />
+		<a href="modify.jsp?pno=<%=vo.getPno()%>"><%=vo.getPno() %> 
+		<img src="<%=vo.getPthumbnail() %>" height="200" width="400" alt="" />
+		</a> <br />
 		
 	<%
 		}

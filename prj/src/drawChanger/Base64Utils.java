@@ -6,6 +6,7 @@ public class Base64Utils {
     private static final String BASE_64_PREFIX = "data:image/png;base64,";
 
     public static byte[] decodeBase64ToBytes(String imageString) {
+    	
         if (imageString.startsWith(BASE_64_PREFIX))
             return Base64.getDecoder().decode(imageString.substring(BASE_64_PREFIX.length()));
         else

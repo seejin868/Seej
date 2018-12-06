@@ -25,6 +25,7 @@ public class deleteFiles {
 
 		for (File f : file) {
 			boolean isExistInDB = false;
+			
 			if (isExistInDB == false) {
 				
 				for (String fileNameDB : fileNamesDB) {
@@ -35,7 +36,7 @@ public class deleteFiles {
 					} // if
 				} // for
 			} // if
-
+			
 			// 반복문을 돌려서 DB에 있는지 없는지 확인 후 없으면 파일 제거
 			if (isExistInDB == false) {
 				f.delete();

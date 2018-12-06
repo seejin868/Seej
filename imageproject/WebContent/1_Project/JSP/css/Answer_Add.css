@@ -1,0 +1,122 @@
+@charset "UTF-8";
+/* body {
+	background: linear-gradient(to bottom, #EAEAEA, white );
+	background-repeat: no-repeat;
+} */
+div {
+	text-align: center;
+	vertical-align: middle;
+}
+#container {
+	margin: 0 auto;
+	padding-top: 20px;
+}
+#list {
+	width: 500px;
+	background-color: #BDBDBD;
+	border-radius: 20px;
+	padding-bottom: 20px;
+	margin: 0;
+	display: inline-block;
+}
+#add {
+	width: 200px;
+	background-color: #8C8C8C;
+	height: 200px;
+	border-radius: 20px;
+	display: inline-block;
+	position: fixed;
+	right: 10%;
+}
+input[type='text'] {
+	border: 0;
+	border-radius: 10px;
+	height: 25px;
+	font-size: 15px;
+	margin-bottom: 5px;
+}
+.btns, .delete_btn {
+	width: 70px;
+	height: 25px;
+	background: linear-gradient(to bottom, #EAEAEA, white );
+	border: 2px solid #BDBDBD;
+	border-radius: 10px;
+	cursor: pointer;
+	margin: 0;
+	padding: 0;
+}
+.delete_btn {
+	border: 2px solid #8C8C8C;
+	padding-bottom: 2px;
+}
+.btns:hover {
+	border: 2px solid #6B66FF;
+	background: linear-gradient(to bottom, #BDBDBD, #EAEAEA );
+}
+.delete_btn:hover {
+	background: linear-gradient(to bottom, #BDBDBD, #EAEAEA );
+	border: 2px solid #CC3D3D;
+}
+.delete {
+	text-align: right;
+	width: 460px;
+	margin-bottom: 2px;
+}
+#a_no_div, #answer_div, #tag_div, #use_div, .read_ano, .read_answer, .read_tag, .read_use,
+.read_tag_txt_done, .read_ano_txt_done, .read_answer_txt_done, .read_use_txt_done {
+	display: inline-block;
+}
+#a_no, #answer, #tag, #use, .read_ano_txt, .read_answer_txt, .read_tag_txt, .read_use_txt,
+.read_tag_txt_done, .read_ano_txt_done, .read_answer_txt_done, .read_use_txt_done {
+	background-color: white;
+	width: 50px;
+	text-align: center;
+}
+#a_no, #answer, #tag, #use {
+	font-weight: bold;
+}
+#tag, .read_tag_txt, .read_tag_txt_done {
+	width: 200px;
+}
+#a_no, .read_ano_txt, .read_ano_txt_done {
+	width: 30px;
+}
+#answer, .read_answer_txt, .read_answer_txt_done {
+	width: 100px;
+}
+#use, .read_use_txt, .read_use_txt_done {
+	width: 70px;
+}
+.read_use_txt {
+	color: blue;
+	font-weight: bold;
+}
+.read_use_txt_done {
+	color: red;
+}
+#head {
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+#backHome_img {
+	width: 50px;
+}
+#backHome {
+	text-align: center;
+	vertical-align: middle;
+	display: inline;
+	position: fixed;
+	left: 5%;
+	top: 15%;
+	background-color: white;
+	border-radius: 15px;
+	padding-bottom: 5px;
+	cursor: pointer;
+}
+#backHome:hover {
+	background-color: lightgray;
+}
+.read:hover input[type='text'] {
+	background-color: #5D5D5D;
+	color: white;
+}

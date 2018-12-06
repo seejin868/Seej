@@ -6,6 +6,7 @@ import java.io.IOException;
 
 public class PngFileMaker {
 
+	
 	public PngFileMaker() {
 		// TODO Auto-generated constructor stub
 	}
@@ -28,8 +29,5 @@ public class PngFileMaker {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//fos.write(Base64Utils.decodeBase64ToBytes(imgUrl));
-		
-		
 	}
 }

@@ -1,0 +1,213 @@
+@charset "UTF-8";
+* {
+	font-family: Comic Sans;
+}
+a {
+	text-decoration: none;
+	color: black;
+}
+#container {
+	margin: 0 auto;
+	width: 70%;
+	text-align: center;
+	padding-top: 20px;
+}
+#edit_box {
+	margin: 0 auto;
+	width: 500px;
+	text-align: right;
+}
+#edit, #delete {
+	background-color: white;
+	border-radius: 20px;
+	padding: 5px;
+	display: inline-block;
+	cursor: pointer;
+	margin-bottom: 10px;
+	width: 100px;
+	height: 15px;
+	text-align: center;
+	background: linear-gradient(to bottom, #EAEAEA, white );
+	border: 2px solid #BDBDBD;
+	font-size: 13px;
+}
+#detail_div {
+	margin: 0 auto;
+	width: 500px;
+	height: 600px;
+	border-radius: 20px;
+	padding-bottom: 30px;
+	padding-top: 30px;
+	background: linear-gradient(to bottom, #F9F9F9, white );
+}
+.other_div {
+	margin: 0 auto;
+	display: inline-block;
+}
+.other_img, .other_img_done {
+	width: 150px;
+	height: 225px;
+	background-color: white;
+	border-radius: 20px;
+	cursor: pointer;
+	transition-duration: 0.3s;
+	transition-property: box-shadow, transform;
+	margin: 0 auto;
+	border: 2px solid lightgray;
+}
+.other_title {
+	font-size: 12px;
+	vertical-align: middle;
+}
+.other_img_done {
+	background-color: #EAEAEA;
+	border: 2px solid #8C8C8C;
+}
+.comments {
+	margin: 0 auto;
+	width: 55%;
+	margin-top: 5px;
+	border-radius: 20px;
+	background-color: #EAEAEA;
+	padding: 10px;
+}
+.game_title, .game_hit, .game_like {
+	margin-top: 5px;
+	visibility: hidden;
+}
+.game_hit, .game_like {
+	display: inline-block;
+}
+.other_div:hover .other_img {
+	box-shadow: 0 15px 20px -10px rgba(0, 0, 0, 0.7);
+	background-color: #EAEAEA;
+}
+.other_div:hover .other_img_done {
+	box-shadow: 0 15px 20px -10px rgba(0, 0, 0, 0.7);
+	background-color: #A6A6A6;
+}
+.other_div:hover .game_title {
+	visibility: visible;
+}
+.other_div:hover .game_hit {
+	visibility: visible;
+}
+.other_div:hover .game_like {
+	visibility: visible;
+}
+.images {
+	width: 150px;
+}
+.hit_pointer {
+	width: 22px;
+}
+.like_thumbsUp {
+	width: 18px;
+}
+h3, h4 {
+	display: inline-block;
+}
+.c_writer {
+	width: 50px;
+	display: inline-block;
+	font-weight: bold;
+}
+.c_comment, .c_writer {
+	padding: 5px;
+	background-color: white;
+	border-radius: 20px;
+	margin-bottom: 5px;
+}
+.c_comment {
+	display: inline-block;
+	width: 80%;
+}
+#add_comment {
+	width: 60%;
+	margin: 0 auto;
+}
+#add_comment_box {
+	background-color: #EAEAEA;
+	border: 0;
+	border-radius: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+#comment_txt {
+	width: 80%;
+	border: 0;
+	border-radius: 20px;
+	height: 25px;
+	font-size: 15px;
+}
+#backHome_img, #information_img {
+	width: 50px;
+}
+#backHome {
+	text-align: center;
+	vertical-align: middle;
+	display: inline;
+	position: fixed;
+	left: 5%;
+	top: 15%;
+	background-color: white;
+	border-radius: 15px;
+	padding-bottom: 5px;
+	cursor: pointer;
+}
+#backHome:hover {
+	background-color: lightgray;
+}
+#detail_img {
+	border-radius: 10px;
+	background-color: #F6F6F6;
+}
+#content {
+	width: 500px;
+	margin: 0 auto;
+	background-color: white;
+	border-radius: 20px;
+}
+input[type='button'] {
+	width: 70px;
+	height: 25px;
+	background: linear-gradient(to bottom, #EAEAEA, white );
+	border: 2px solid #BDBDBD;
+	border-radius: 10px;
+	cursor: pointer;
+	padding-bottom: 3px;
+}
+#like {
+	padding: 0;
+}
+input[type='button']:hover, #edit:hover, #delete:hover {
+	border: 2px solid #6B66FF;
+	background: linear-gradient(to bottom, #BDBDBD, #EAEAEA );
+}
+#information_div {
+	position: fixed;
+	top: 15%;
+	display: inline;
+	right: 5%;
+	text-align: right;
+}
+#information_img {
+	cursor: pointer;
+}
+#information_img:hover, #information_txt:hover #information_img {
+	background: rgba(0,0,255,0.3);
+	border-radius: 50%;
+}
+#information_txt {
+	width: 300px;
+	text-align: center;
+	padding: 0;
+	border-radius: 20px;
+	background-color: white;
+	border: 2px solid gray;
+	cursor: pointer;
+}
+h4, p {
+	padding: 0;
+	margin: 10px;
+}
